@@ -35,13 +35,11 @@ Companies
 ```json
 {
   "id”: Number,
-  "companyName": String,
+  "name": String,
   "website": String,
-  "companyUserName": String,
-  "companyUser": {
-       “email”: String,
-       “password”: String,
-    },
+  "userName": String,
+  “userEmail”: String,
+  “userPassword”: String,
   "agreesWithConditions": Boolean,
 }
 ```
@@ -52,10 +50,8 @@ Students
 {
   "id": Number,
   "name": String,
-  "studentUser": {
-       “email”: String,
-       “password”: String,
-    },
+  “email”: String,
+  “password”: String,
   "cohort": String,
   "projectId": Array,
 }
@@ -79,7 +75,7 @@ After MVP: https://worldtimeapi.org/
 
 Frontend: [Repository Link Placeholder]()
 
-Backend: [Repository Link Placeholder]()
+Backend: [Repository Link Placeholder](https://ironprojects-hub-db.adaptable.app/)
 
 [Deploy Link Placeholder]()
 
