@@ -7,16 +7,19 @@ import Company from './pages/Company';
 import Student from './pages/Student';
 import ProjectDetails from './pages/ProjectDetails';
 import ProjectsList from './components/ProjectsList';
+import ChooseCompany from './pages/ChooseCompany';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/company' element={<Company />} />
-        <Route path='/student' element={<Student />} />
-        <Route path='/:userType/projects' element={<ProjectsList />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/company" element={<ChooseCompany />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/company/:companyId" element={<Company />} />
+        {/* projectsList não é uma página, é um componente rendered dentro de uma página */}
+        {/* <Route path='/:userType/projects' element={<ProjectsList />} /> */}
         {/* <Route
           path='/company/projects/:projectId'
           element={<ProjectDetails />}
@@ -25,10 +28,7 @@ function App() {
           path='/student/projects/:projectId'
           element={<ProjectDetails />}
         /> */}
-        <Route
-          path='/:userType/projects/:projectId'
-          element={<ProjectDetails />}
-        />
+        <Route path="/projects/:projectId" element={<ProjectDetails />} />
       </Routes>
     </div>
   );
