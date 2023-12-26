@@ -22,6 +22,7 @@ function ProjectsList({ userType }) {
     getProjects();
   }, []);
 
+  // mostrar projetos dentro de uma função
   return (
     <div className="ProjectsList">
       <h1>Your Projects</h1>

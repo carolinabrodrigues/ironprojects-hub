@@ -15,15 +15,17 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/company" element={<ChooseCompany />} />
+        {/* user type - consoante empresa ou estudante renders entire page */}
+        {/* <Route path="/company" element={<ChooseCompany />} />
         <Route path="/student" element={<Student />} />
-        <Route path="/company/:companyId" element={<Company />} />
+        <Route path="/company/:companyId" element={<Company />} /> */}
         {/* projectsList não é uma página, é um componente rendered dentro de uma página */}
-        {/* <Route path='/:userType/projects' element={<ProjectsList />} /> */}
-        {/* <Route
-          path='/company/projects/:projectId'
+        <Route path='/:userType/projects' element={<ProjectsList />} />
+        <Route
+          path='/:userType/projects/:projectId'
           element={<ProjectDetails />}
         />
+        {/* 
         <Route
           path='/student/projects/:projectId'
           element={<ProjectDetails />}
