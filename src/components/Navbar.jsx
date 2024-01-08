@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   return (
     <nav>
-      <Link to='/'>
+      <Link to="/">
         <button>Home</button>
       </Link>
-      <Link to='/company'>
+      <Link to="/2/projects">
         <button>Company</button>
       </Link>
-      <Link to='/student'>
+      <Link to="/student/projects">
         <button>Student</button>
       </Link>
     </nav>

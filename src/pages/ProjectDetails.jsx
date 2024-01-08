@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function ProjectDetails() {
   const [project, setProject] = useState(null);
 
-  const { projectId } = useParams();
+  const { projectId, userType } = useParams();
 
   const getSingleProject = async () => {
     try {
@@ -24,14 +24,16 @@ function ProjectDetails() {
   }, [projectId]);
 
   return (
-    <div className='ProjectDetails'>
+    <div className="ProjectDetails">
+      {userType === 'student' && <button>Show Interest</button>}
+      {userType !== 'student' && <button>Edit Project</button>}
       {project && (
         <>
           <h1>{project.challengeName}</h1>
           <p>{project.challengeDescription}</p>
           {project.stakeholders.map(stakeholder => {
             return (
-              <div key={project.id} className='stakeholder-info'>
+              <div key={project.id} className="stakeholder-info">
                 <p>{stakeholder.name}</p>
                 <p>{stakeholder.email}</p>
               </div>
