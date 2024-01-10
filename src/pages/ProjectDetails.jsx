@@ -25,8 +25,8 @@ function ProjectDetails() {
 
   return (
     <div className="ProjectDetails">
-      {userType === 'student' && <button>Show Interest</button>}
-      {userType !== 'student' && <button>Edit Project</button>}
+      {+userType > 500 && <button>Show Interest</button>}
+      {+userType < 100 && <button>Edit Project</button>}
       {project && (
         <>
           <h1>{project.challengeName}</h1>

@@ -6,6 +6,7 @@ import AddProject from './AddProject';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
   const { userType } = useParams();
 
@@ -24,13 +25,13 @@ function ProjectsList() {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [submitted]);
 
   const showProjects = user => {
     const filteredProjects = projects.filter(
       project => project.companyId === +user
     );
-    if (user === 'student') {
+    if (+user > 500) {
       return projects.map(project => {
         return (
           <div key={project.id} className="ProjectCard">
@@ -42,7 +43,7 @@ function ProjectsList() {
           </div>
         );
       });
-    } else if (user !== 'student' && filteredProjects.length > 0) {
+    } else if (+user < 100 && filteredProjects.length > 0) {
       return filteredProjects.map(project => {
         return (
           <div key={project.id} className="ProjectCard">
@@ -55,7 +56,7 @@ function ProjectsList() {
         );
       });
     } else {
-      return <AddProject />;
+      return <AddProject submitted={submitted} setSubmitted={setSubmitted} />;
     }
   };
 
