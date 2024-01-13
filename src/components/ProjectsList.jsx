@@ -56,13 +56,20 @@ function ProjectsList({
         );
       });
     } else if (
-      +user < 100 &&
-      filteredProjects.length > 0
-      /* && adding === false */
+      +user < 100
+      /* &&
+      filteredProjects.length > 0 && adding === false */
     ) {
       /* if company */
       return (
         <>
+          <AddProject
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            adding={adding}
+            setAdding={setAdding}
+          />
+          {projects.length === 0 && <Text>Loading projects</Text>}
           {filteredProjects.map(project => {
             return (
               <div key={project.id} className='ProjectCard'>
@@ -90,13 +97,6 @@ function ProjectsList({
   return (
     <div className='ProjectsList'>
       <Heading as='h1'>Projects</Heading>
-      <AddProject
-        submitted={submitted}
-        setSubmitted={setSubmitted}
-        adding={adding}
-        setAdding={setAdding}
-      />
-      {projects.length === 0 && <Text>Loading projects</Text>}
       {projects.length > 0 && showProjects(userType)}
     </div>
   );
