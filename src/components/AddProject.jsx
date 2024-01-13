@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function AddProject({ setSubmitted, submitted }) {
+function AddProject({ setSubmitted, submitted, adding, setAdding }) {
   const { userType } = useParams();
 
   const [companyId, setCompanyId] = useState(Number(userType));
@@ -34,6 +34,7 @@ function AddProject({ setSubmitted, submitted }) {
       await axios.post(`${import.meta.env.VITE_API_URL}/projects`, requestBody);
 
       setSubmitted(!submitted);
+      setAdding(!adding);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +44,7 @@ function AddProject({ setSubmitted, submitted }) {
     <div className='AddProject'>
       <h2>Add Project</h2>
       <form method='post' onSubmit={handleSubmit}>
-        <label htmlFor='name'>Name:</label>
+        <label htmlFor='name'>Stakeholder Name:</label>
         <input
           type='text'
           name='name'
@@ -52,7 +53,7 @@ function AddProject({ setSubmitted, submitted }) {
           value={name}
           required
         />
-        <label htmlFor='email'>Email:</label>
+        <label htmlFor='email'>Stakeholder Email:</label>
         <input
           type='email'
           name='email'
@@ -80,7 +81,7 @@ function AddProject({ setSubmitted, submitted }) {
           value={challengeDescription}
           required
         ></textarea>
-        <label htmlFor='videoSubmission'>Video URL:</label>
+        <label htmlFor='videoSubmission'>Pitch Video URL:</label>
         <input
           type='url'
           name='videoSubmission'
@@ -90,7 +91,7 @@ function AddProject({ setSubmitted, submitted }) {
           required
         />
 
-        <button type='submit'>Add Project</button>
+        <button type='submit'>Add</button>
       </form>
     </div>
   );
