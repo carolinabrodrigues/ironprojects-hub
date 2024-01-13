@@ -1,21 +1,59 @@
-import { Link } from 'react-router-dom';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import {
+  Box,
+  Link as ChakraLink,
+  Image,
+  Button,
+  HStack,
+} from '@chakra-ui/react';
+
+import ironhackLogoLight from '../assets/logo/ironhack/light.svg';
+import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 
 function Navbar() {
   return (
-    <nav>
-      <Link to='/'>
-        <button>LOGO</button>
-      </Link>
-      {/* <Link to='/'>
+    <Box
+      as="nav"
+      display="flex"
+      justifyContent="space-between"
+      p="32px 80px"
+      pos="fixed"
+      w="100vw"
+    >
+      <HStack spacing="48px">
+        <ChakraLink as={ReactRouterLink} to="/">
+          <Image src={ironhackLogoDark} h="32px" />
+        </ChakraLink>
+        {/* <Link to='/'>
         <button>How it works</button>
       </Link> */}
-      <Link to='/2/projects'>
-        <button>Company</button>
-      </Link>
-      <Link to='/501/projects'>
-        <button>Student</button>
-      </Link>
-    </nav>
+        <ChakraLink as={ReactRouterLink} to="">
+          How it Works
+        </ChakraLink>
+      </HStack>
+      <HStack spacing="24px">
+        {/* <ChakraLink as={ReactRouterLink} to="">
+          <Button variant="link" size="lg" borderRadius="32px">
+            Register
+          </Button>
+        </ChakraLink>
+        <ChakraLink as={ReactRouterLink} to="">
+          <Button variant="solid" size="lg" borderRadius="32px">
+            Log In
+          </Button>
+        </ChakraLink> */}
+        <ChakraLink as={ReactRouterLink} to="/2/projects">
+          <Button variant="solid" size="lg" borderRadius="32px">
+            Company
+          </Button>
+        </ChakraLink>
+        <ChakraLink as={ReactRouterLink} to="/501/projects">
+          <Button variant="solid" size="lg" borderRadius="32px">
+            Student
+          </Button>
+        </ChakraLink>
+      </HStack>
+    </Box>
   );
 }
 
