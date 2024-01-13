@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import AddProject from './AddProject';
+
+import { Heading, Card, CardBody, Stack, Button, Text } from '@chakra-ui/react';
 
 function ProjectsList({
   userType,
@@ -39,50 +41,62 @@ function ProjectsList({
       return projects.map(project => {
         return (
           <div key={project.id} className='ProjectCard'>
-            <h2>{project.challengeName}</h2>
-            <p>{project.challengeDescription}</p>
-            <Link to={`${project.id}`}>
-              <button>View more details</button>
-            </Link>
+            <Card>
+              <CardBody>
+                <Stack spacing='7'>
+                  <Heading size='md'>{project.challengeName}</Heading>
+                  <Text fontSize='md'>{project.challengeDescription}</Text>
+                  <Link to={`${project.id}`}>
+                    <Button>View more details</Button>
+                  </Link>
+                </Stack>
+              </CardBody>
+            </Card>
           </div>
         );
       });
-    } else if (+user < 100 && filteredProjects.length > 0 && adding === false) {
+    } else if (
+      +user < 100 &&
+      filteredProjects.length > 0
+      /* && adding === false */
+    ) {
       /* if company */
       return (
         <>
-          <button onClick={() => setAdding(!adding)}>Add New Project</button>
           {filteredProjects.map(project => {
             return (
               <div key={project.id} className='ProjectCard'>
-                <h2>{project.challengeName}</h2>
-                <p>{project.challengeDescription}</p>
-                <Link to={`${project.id}`}>
-                  <button>View more details</button>
-                </Link>
+                <Card>
+                  <CardBody>
+                    <Stack spacing='7'>
+                      <Heading size='md'>{project.challengeName}</Heading>
+                      <Text fontSize='md'>{project.challengeDescription}</Text>
+                      <Link to={`${project.id}`}>
+                        <Button>View more details</Button>
+                      </Link>
+                    </Stack>
+                  </CardBody>
+                </Card>
               </div>
             );
           })}
         </>
       );
     } else {
-      return (
-        <>
-          <AddProject
-            submitted={submitted}
-            setSubmitted={setSubmitted}
-            adding={adding}
-            setAdding={setAdding}
-          />
-        </>
-      );
+      return <></>;
     }
   };
 
   return (
     <div className='ProjectsList'>
-      <h1>Projects</h1>
-      {projects.length === 0 && <p>Loading projects</p>}
+      <Heading as='h1'>Projects</Heading>
+      <AddProject
+        submitted={submitted}
+        setSubmitted={setSubmitted}
+        adding={adding}
+        setAdding={setAdding}
+      />
+      {projects.length === 0 && <Text>Loading projects</Text>}
       {projects.length > 0 && showProjects(userType)}
     </div>
   );

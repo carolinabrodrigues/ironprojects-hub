@@ -3,6 +3,18 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import {
+  Heading,
+  Text,
+  Box,
+  Link,
+  Card,
+  CardHeader,
+  CardBody,
+  Stack,
+} from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+
 function User() {
   const [user, setUser] = useState(null);
   // to be used on projects list & details
@@ -41,23 +53,75 @@ function User() {
 
   return (
     <div>
-      {user && <h1>Welcome, {user.name}</h1>}
+      {user && <Heading as='h1'>Welcome, {user.name}</Heading>}
+
+      {/* if company */}
       {user && +userType < 100 && (
         <>
-          <h3>Company Profile</h3>
-          <p>Company: {user.name}</p>
-          <p>Website: {user.website}</p>
-          <p>User: {user.userName}</p>
-          <p>Email: {user.userEmail}</p>
+          <Card align='center' maxW='sm'>
+            <CardHeader>
+              <Heading size='md'>Company Profile</Heading>
+            </CardHeader>
+
+            <CardBody>
+              <Stack spacing='4'>
+                <Box>
+                  <Heading size='xs' textTransform='uppercase'>
+                    Company Name
+                  </Heading>
+                  <Text pt='2' fontSize='sm'>
+                    {user.name}
+                  </Text>
+                </Box>
+                <Box>
+                  <Heading size='xs' textTransform='uppercase'>
+                    <Link href={user.website} isExternal>
+                      Website <ExternalLinkIcon mx='2px' />
+                    </Link>
+                  </Heading>
+                </Box>
+                <Box>
+                  <Heading size='xs' textTransform='uppercase'>
+                    User
+                  </Heading>
+                  <Text pt='2' fontSize='sm'>
+                    {user.userName}
+                  </Text>
+                </Box>
+                <Box>
+                  <Heading size='xs' textTransform='uppercase'>
+                    Email
+                  </Heading>
+                  <Text pt='2' fontSize='sm'>
+                    {user.userEmail}
+                  </Text>
+                </Box>
+              </Stack>
+            </CardBody>
+          </Card>
+
+          <ProjectsList
+            userType={userType}
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            adding={adding}
+            setAdding={setAdding}
+          />
         </>
       )}
-      <ProjectsList
-        userType={userType}
-        submitted={submitted}
-        setSubmitted={setSubmitted}
-        adding={adding}
-        setAdding={setAdding}
-      />
+
+      {/* if student */}
+      {user && +userType > 500 && (
+        <Box>
+          <ProjectsList
+            userType={userType}
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            adding={adding}
+            setAdding={setAdding}
+          />
+        </Box>
+      )}
     </div>
   );
 }
