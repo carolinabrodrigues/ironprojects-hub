@@ -5,17 +5,19 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import ProjectsList from './components/ProjectsList';
+import User from './pages/User';
 // import ChooseCompany from './pages/ChooseCompany';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:userType/projects" element={<ProjectsList />} />
+        <Route path='/' element={<Home />} />
+        {/* <Route path="/:userType/projects" element={<ProjectsList />} /> */}
+        <Route path='/:userType/projects' element={<User />} />
         <Route
-          path="/:userType/projects/:projectId"
+          path='/:userType/projects/:projectId'
           element={<ProjectDetails />}
         />
       </Routes>

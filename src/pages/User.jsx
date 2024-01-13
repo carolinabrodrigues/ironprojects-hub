@@ -4,59 +4,60 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function User() {
-  const [company, setCompany] = useState(null);
-  const [student, setStudent] = useState(null);
+  const [user, setUser] = useState(null);
+  // to be used on projects list & details
+  const [submitted, setSubmitted] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   const { userType } = useParams();
+  console.log(userType);
 
   // to get the user name - if it's company or student - NOT FINISHED
-  const getCompany = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/companies/${userType}`
-      );
-      setCompany(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getStudent = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/students/${userType}`
-      );
-      setStudent(response.data);
-    } catch (error) {
-      console.log(error);
+  const getUser = async () => {
+    if (+userType < 100) {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/companies/${userType}`
+        );
+        setUser(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (+userType > 500) {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/students/${userType}`
+        );
+        setUser(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   useEffect(() => {
-    getStudent();
+    getUser();
   }, [userType]);
-
-  useEffect(() => {
-    getCompany();
-  }, [userType]);
-
-  const welcomeUserMessage = user => {
-    if (+user < 100) return <h1>Welcome, {company.name}</h1>;
-    if (+user > 500) return <h1>Welcome, {student.name}</h1>;
-  };
 
   return (
     <div>
-      {welcomeUserMessage}
-      {+userType < 100 && (
+      {user && <h1>Welcome, {user.name}</h1>}
+      {user && +userType < 100 && (
         <>
-          <p>Company: {company.name}</p>
-          <p>Website: {company.website}</p>
-          <p>User: {company.userName}</p>
-          <p>Email: {company.userEmail}</p>
+          <h3>Company Profile</h3>
+          <p>Company: {user.name}</p>
+          <p>Website: {user.website}</p>
+          <p>User: {user.userName}</p>
+          <p>Email: {user.userEmail}</p>
         </>
       )}
-      <ProjectsList userType={userType} />
+      <ProjectsList
+        userType={userType}
+        submitted={submitted}
+        setSubmitted={setSubmitted}
+        adding={adding}
+        setAdding={setAdding}
+      />
     </div>
   );
 }
