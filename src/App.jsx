@@ -10,14 +10,14 @@ import User from './pages/User';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path="/" element={<Home />} />
         {/* <Route path="/:userType/projects" element={<ProjectsList />} /> */}
-        <Route path='/:userType/projects' element={<User />} />
+        <Route path="/:userType/projects" element={<User />} />
         <Route
-          path='/:userType/projects/:projectId'
+          path="/:userType/projects/:projectId"
           element={<ProjectDetails />}
         />
       </Routes>
