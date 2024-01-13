@@ -4,14 +4,14 @@ import { Link, useParams } from 'react-router-dom';
 
 import AddProject from './AddProject';
 
-function ProjectsList() {
+function ProjectsList({
+  userType,
+  setSubmitted,
+  submitted,
+  adding,
+  setAdding,
+}) {
   const [projects, setProjects] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
-  const [adding, setAdding] = useState(false);
-
-  const { userType } = useParams();
-
-  console.log(userType); // -> undefined
 
   const getProjects = async () => {
     try {
