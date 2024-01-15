@@ -6,13 +6,7 @@ import AddProject from './AddProject';
 
 import { Heading, Card, CardBody, Stack, Button, Text } from '@chakra-ui/react';
 
-function ProjectsList({
-  userType,
-  setSubmitted,
-  submitted,
-  adding,
-  setAdding,
-}) {
+function ProjectsList({ userType, setSubmitted, submitted }) {
   const [projects, setProjects] = useState([]);
 
   const getProjects = async () => {
@@ -55,20 +49,11 @@ function ProjectsList({
           </div>
         );
       });
-    } else if (
-      +user < 100
-      /* &&
-      filteredProjects.length > 0 && adding === false */
-    ) {
+    } else if (+user < 100) {
       /* if company */
       return (
         <>
-          <AddProject
-            submitted={submitted}
-            setSubmitted={setSubmitted}
-            adding={adding}
-            setAdding={setAdding}
-          />
+          <AddProject submitted={submitted} setSubmitted={setSubmitted} />
           {projects.length === 0 && <Text>Loading projects</Text>}
           {filteredProjects.map(project => {
             return (

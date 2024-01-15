@@ -19,7 +19,6 @@ function User() {
   const [user, setUser] = useState(null);
   // to be used on projects list & details
   const [submitted, setSubmitted] = useState(false);
-  const [adding, setAdding] = useState(false);
 
   const { userType } = useParams();
   console.log(userType);
@@ -104,8 +103,6 @@ function User() {
             userType={userType}
             submitted={submitted}
             setSubmitted={setSubmitted}
-            adding={adding}
-            setAdding={setAdding}
           />
         </>
       )}
@@ -117,8 +114,6 @@ function User() {
             userType={userType}
             submitted={submitted}
             setSubmitted={setSubmitted}
-            adding={adding}
-            setAdding={setAdding}
           />
         </Box>
       )}

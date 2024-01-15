@@ -19,7 +19,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-function AddProject({ setSubmitted, submitted, adding, setAdding }) {
+function AddProject({ setSubmitted, submitted }) {
   const { userType } = useParams();
 
   const [companyId, setCompanyId] = useState(Number(userType));
@@ -51,7 +51,6 @@ function AddProject({ setSubmitted, submitted, adding, setAdding }) {
       await axios.post(`${import.meta.env.VITE_API_URL}/projects`, requestBody);
 
       setSubmitted(!submitted);
-      setAdding(!adding);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +62,6 @@ function AddProject({ setSubmitted, submitted, adding, setAdding }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const addingProject = () => {
-    // setAdding(!adding);
     onOpen();
   };
 
