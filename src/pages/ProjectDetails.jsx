@@ -18,6 +18,9 @@ import {
 function ProjectDetails() {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
+  const [interested, setInterested] = useState(null);
+  const [matches, setMatches] = useState([]);
+  const [foundMatchId, setFoundMatchId] = useState(null);
 
   const { projectId, userType } = useParams();
   const navigate = useNavigate();
@@ -50,19 +53,79 @@ function ProjectDetails() {
     getSingleProject();
   }, [projectId, edited]);
 
+  // NEEDS REVIEW
+  const getMatchId = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/projectsStudents`
+      );
+
+      setMatches(response.data);
+
+      const foundMatch = matches.find(
+        match => match.projectId === +projectId && match.studentId === +userType
+      );
+
+      setFoundMatchId(foundMatch.id);
+      setInterested(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMatchId();
+  }, [interested]);
+
+  const handleInterest = async () => {
+    if (interested === false) {
+      try {
+        const projectsStudents = {
+          projectId: projectId,
+          studentId: userType,
+        };
+
+        const requestBody = { projectsStudents };
+
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/projectsStudents`,
+          requestBody
+        );
+
+        setInterested(!interested);
+        console.log(interested);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
+        );
+
+        setInterested(!interested);
+        console.log(interested);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   // alert to delete
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
   return (
-    <div className="ProjectDetails">
-      <Box pt="120px">
-        {+userType > 500 && <button>Show Interest</button>}
+    <div className='ProjectDetails'>
+      <Box pt='120px'>
+        {+userType > 500 && (
+          <Button onClick={handleInterest}>Show Interest</Button>
+        )}
         {+userType < 100 && (
           <>
             <EditProjectDetails edited={edited} setEdited={setEdited} />
 
-            <Button colorScheme="red" onClick={onOpen}>
+            <Button colorScheme='red' onClick={onOpen}>
               Delete Project
             </Button>
 
@@ -75,7 +138,7 @@ function ProjectDetails() {
               >
                 <AlertDialogOverlay>
                   <AlertDialogContent>
-                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    <AlertDialogHeader fontSize='lg' fontWeight='bold'>
                       Delete Project
                     </AlertDialogHeader>
 
@@ -89,7 +152,7 @@ function ProjectDetails() {
                       <Button ref={cancelRef} onClick={onClose}>
                         Cancel
                       </Button>
-                      <Button colorScheme="red" onClick={deleteProject} ml={3}>
+                      <Button colorScheme='red' onClick={deleteProject} ml={3}>
                         Delete {project.challengeName}
                       </Button>
                     </AlertDialogFooter>
@@ -105,7 +168,7 @@ function ProjectDetails() {
             <p>{project.challengeDescription}</p>
             {project.stakeholders.map(stakeholder => {
               return (
-                <div key={project.id} className="stakeholder-info">
+                <div key={project.id} className='stakeholder-info'>
                   <p>{stakeholder.name}</p>
                   <p>{stakeholder.email}</p>
                 </div>
