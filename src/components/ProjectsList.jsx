@@ -81,7 +81,9 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
 
   return (
     <div className='ProjectsList'>
-      <Heading as='h1'>Projects</Heading>
+      <Heading as='h1' my={17}>
+        Projects
+      </Heading>
       {projects.length > 0 && showProjects(userType)}
     </div>
   );

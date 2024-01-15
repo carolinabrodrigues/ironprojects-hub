@@ -51,72 +51,80 @@ function User() {
   }, [userType]);
 
   return (
-    <div>
-      {user && <Heading as='h1'>Welcome, {user.name}</Heading>}
+    <div className='UserPage'>
+      <Box pt='120px' mx={10}>
+        {user && (
+          <Heading as='h1' my={17}>
+            Welcome, {user.name}
+          </Heading>
+        )}
 
-      {/* if company */}
-      {user && +userType < 100 && (
-        <>
-          <Card align='center' maxW='sm'>
-            <CardHeader>
-              <Heading size='md'>Company Profile</Heading>
-            </CardHeader>
+        {/* if company */}
+        {user && +userType < 100 && (
+          <>
+            <Box align='center' my={17}>
+              <Card align='center' maxW='xl'>
+                <CardHeader>
+                  <Heading size='md'>Company Profile</Heading>
+                </CardHeader>
 
-            <CardBody>
-              <Stack spacing='4'>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    Company Name
-                  </Heading>
-                  <Text pt='2' fontSize='sm'>
-                    {user.name}
-                  </Text>
-                </Box>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    <Link href={user.website} isExternal>
-                      Website <ExternalLinkIcon mx='2px' />
-                    </Link>
-                  </Heading>
-                </Box>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    User
-                  </Heading>
-                  <Text pt='2' fontSize='sm'>
-                    {user.userName}
-                  </Text>
-                </Box>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    Email
-                  </Heading>
-                  <Text pt='2' fontSize='sm'>
-                    {user.userEmail}
-                  </Text>
-                </Box>
-              </Stack>
-            </CardBody>
-          </Card>
+                <CardBody>
+                  <Stack spacing='4'>
+                    <Box>
+                      <Heading size='xs' textTransform='uppercase'>
+                        Company Name
+                      </Heading>
+                      <Text pt='2' fontSize='sm'>
+                        {user.name}
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Heading size='xs' textTransform='uppercase'>
+                        <Link href={user.website} isExternal>
+                          Website <ExternalLinkIcon mx='2px' />
+                        </Link>
+                      </Heading>
+                    </Box>
+                    <Box>
+                      <Heading size='xs' textTransform='uppercase'>
+                        User
+                      </Heading>
+                      <Text pt='2' fontSize='sm'>
+                        {user.userName}
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Heading size='xs' textTransform='uppercase'>
+                        Email
+                      </Heading>
+                      <Text pt='2' fontSize='sm'>
+                        {user.userEmail}
+                      </Text>
+                    </Box>
+                  </Stack>
+                </CardBody>
+              </Card>
+            </Box>
 
-          <ProjectsList
-            userType={userType}
-            submitted={submitted}
-            setSubmitted={setSubmitted}
-          />
-        </>
-      )}
+            <ProjectsList
+              userType={userType}
+              submitted={submitted}
+              setSubmitted={setSubmitted}
+            />
+          </>
+        )}
 
-      {/* if student */}
-      {user && +userType > 500 && (
-        <Box>
-          <ProjectsList
-            userType={userType}
-            submitted={submitted}
-            setSubmitted={setSubmitted}
-          />
-        </Box>
-      )}
+        {/* if student */}
+        {user && +userType > 500 && (
+          <Box>
+            <ProjectsList
+              userType={userType}
+              submitted={submitted}
+              setSubmitted={setSubmitted}
+            />
+          </Box>
+        )}
+      </Box>
     </div>
   );
 }
