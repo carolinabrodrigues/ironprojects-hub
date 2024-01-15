@@ -13,6 +13,14 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
+  Heading,
+  HStack,
+  VStack,
+  Flex,
+  Grid,
+  GridItem,
+  Link,
+  AspectRatio,
 } from '@chakra-ui/react';
 
 function ProjectDetails() {
@@ -56,61 +64,97 @@ function ProjectDetails() {
 
   return (
     <div className="ProjectDetails">
-      <Box pt="120px">
+      <Box p="120px 80px 32px">
         {+userType > 500 && <button>Show Interest</button>}
         {+userType < 100 && (
           <>
-            <EditProjectDetails edited={edited} setEdited={setEdited} />
-
-            <Button colorScheme="red" onClick={onOpen}>
-              Delete Project
-            </Button>
-
             {/* alert to delete */}
             {project && (
-              <AlertDialog
-                isOpen={isOpen}
-                leastDestructiveRef={cancelRef}
-                onClose={onClose}
-              >
-                <AlertDialogOverlay>
-                  <AlertDialogContent>
-                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              <>
+                <AlertDialog
+                  isOpen={isOpen}
+                  leastDestructiveRef={cancelRef}
+                  onClose={onClose}
+                >
+                  <AlertDialogOverlay>
+                    <AlertDialogContent>
+                      <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                        Delete Project
+                      </AlertDialogHeader>
+
+                      <AlertDialogBody>
+                        Are you sure you want to delete{' '}
+                        <i>{project.challengeName}</i>? You can't undo this
+                        action afterwards.
+                      </AlertDialogBody>
+
+                      <AlertDialogFooter>
+                        <Button ref={cancelRef} onClick={onClose}>
+                          Cancel
+                        </Button>
+                        <Button
+                          colorScheme="red"
+                          onClick={deleteProject}
+                          ml={3}
+                        >
+                          Delete {project.challengeName}
+                        </Button>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialogOverlay>
+                </AlertDialog>
+                <Flex justifyContent="space-between" mb={12}>
+                  <Heading as="h1" size="xl">
+                    {project.challengeName}
+                  </Heading>
+                  <HStack spacing={6}>
+                    <Button colorScheme="red" onClick={onOpen} variant="link">
                       Delete Project
-                    </AlertDialogHeader>
-
-                    <AlertDialogBody>
-                      Are you sure you want to delete{' '}
-                      <i>{project.challengeName}</i>? You can't undo this action
-                      afterwards.
-                    </AlertDialogBody>
-
-                    <AlertDialogFooter>
-                      <Button ref={cancelRef} onClick={onClose}>
-                        Cancel
-                      </Button>
-                      <Button colorScheme="red" onClick={deleteProject} ml={3}>
-                        Delete {project.challengeName}
-                      </Button>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialogOverlay>
-              </AlertDialog>
+                    </Button>
+                    <EditProjectDetails edited={edited} setEdited={setEdited} />
+                  </HStack>
+                </Flex>
+                <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+                  <GridItem colSpan={4}>
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
+                        About the challenge:
+                      </Heading>
+                      <p>{project.challengeDescription}</p>
+                      <AspectRatio width="100%">
+                        <iframe
+                          title={`${project.challengeName}'s video`}
+                          src={project.videoSubmission}
+                          allowFullScreen
+                        />
+                      </AspectRatio>
+                    </VStack>
+                  </GridItem>
+                  <GridItem colSpan={2}>
+                    {project.stakeholders.map(stakeholder => {
+                      return (
+                        <div key={project.id} className="stakeholder-info">
+                          <VStack align="left">
+                            <Heading as="h2" size="md">
+                              Stakeholder information:
+                            </Heading>
+                            <p>
+                              {stakeholder.name} -{' '}
+                              <Link
+                                href={`mailto:${stakeholder.email}`}
+                                isExternal
+                              >
+                                {stakeholder.email}
+                              </Link>
+                            </p>
+                          </VStack>
+                        </div>
+                      );
+                    })}
+                  </GridItem>
+                </Grid>
+              </>
             )}
-          </>
-        )}
-        {project && (
-          <>
-            <h1>{project.challengeName}</h1>
-            <p>{project.challengeDescription}</p>
-            {project.stakeholders.map(stakeholder => {
-              return (
-                <div key={project.id} className="stakeholder-info">
-                  <p>{stakeholder.name}</p>
-                  <p>{stakeholder.email}</p>
-                </div>
-              );
-            })}
           </>
         )}
       </Box>
