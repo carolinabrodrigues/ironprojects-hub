@@ -19,6 +19,7 @@ function Navbar() {
       p="32px 80px"
       pos="fixed"
       w="100vw"
+      zIndex="1"
     >
       <HStack spacing="48px">
         <ChakraLink as={ReactRouterLink} to="/">

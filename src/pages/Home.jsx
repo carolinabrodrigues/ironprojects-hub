@@ -62,7 +62,7 @@ function Home() {
             previous editions:
           </Text>
           <SimpleGrid columns={3} spacing="16px" mt={16}>
-            <Card variant="outline" zIndex="-1">
+            <Card variant="outline">
               <CardBody>
                 <VStack align="left" spacing="16px">
                   <Image
@@ -96,7 +96,7 @@ function Home() {
                 </VStack>
               </CardBody>
             </Card>
-            <Card variant="outline" zIndex="-1">
+            <Card variant="outline">
               <CardBody>
                 <VStack align="left" spacing="16px">
                   <Image
@@ -130,7 +130,7 @@ function Home() {
                 </VStack>
               </CardBody>
             </Card>
-            <Card variant="outline" zIndex="-1">
+            <Card variant="outline">
               <CardBody>
                 <VStack align="left" spacing="16px">
                   <Image
