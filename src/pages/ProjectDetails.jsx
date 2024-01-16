@@ -45,7 +45,137 @@ function ProjectDetails() {
     }
   };
 
-  const displayProject = () => {
+  const displayProject = user => {
+    if (user > 500) {
+      return (
+        <>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
+              {project.challengeName}
+            </Heading>
+            <HStack spacing={6}>
+              <Button onClick={handleInterest}>Show Interest</Button>
+            </HStack>
+          </Flex>
+          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+            <GridItem colSpan={4}>
+              <VStack align="left">
+                <Heading as="h2" size="md">
+                  About the challenge:
+                </Heading>
+                <p>{project.challengeDescription}</p>
+                <AspectRatio maxW="560px" ratio={1}>
+                  <iframe
+                    title={`${project.challengeName}'s video`}
+                    src={project.videoSubmission}
+                    allowFullScreen
+                  />
+                </AspectRatio>
+              </VStack>
+            </GridItem>
+            <GridItem colSpan={2}>
+              {project.stakeholders.map(stakeholder => {
+                return (
+                  <div key={project.id} className="stakeholder-info">
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
+                        Stakeholder information:
+                      </Heading>
+                      <p>
+                        {stakeholder.name} -{' '}
+                        <Link href={`mailto:${stakeholder.email}`} isExternal>
+                          {stakeholder.email}
+                        </Link>
+                      </p>
+                    </VStack>
+                  </div>
+                );
+              })}
+            </GridItem>
+          </Grid>
+        </>
+      );
+    } else if (user < 100) {
+      return (
+        <>
+          <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Delete Project
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Are you sure you want to delete <i>{project.challengeName}</i>
+                  ? You can't undo this action afterwards.
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button colorScheme="red" onClick={deleteProject} ml={3}>
+                    Delete {project.challengeName}
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
+              {project.challengeName}
+            </Heading>
+            <HStack spacing={6}>
+              <Button colorScheme="red" onClick={onOpen} variant="link">
+                Delete Project
+              </Button>
+              <EditProjectDetails edited={edited} setEdited={setEdited} />
+            </HStack>
+          </Flex>
+          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+            <GridItem colSpan={4}>
+              <VStack align="left">
+                <Heading as="h2" size="md">
+                  About the challenge:
+                </Heading>
+                <p>{project.challengeDescription}</p>
+                <AspectRatio maxW="560px" ratio={1}>
+                  <iframe
+                    title={`${project.challengeName}'s video`}
+                    src={project.videoSubmission}
+                    allowFullScreen
+                  />
+                </AspectRatio>
+              </VStack>
+            </GridItem>
+            <GridItem colSpan={2}>
+              {project.stakeholders.map(stakeholder => {
+                return (
+                  <div key={project.id} className="stakeholder-info">
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
+                        Stakeholder information:
+                      </Heading>
+                      <p>
+                        {stakeholder.name} -{' '}
+                        <Link href={`mailto:${stakeholder.email}`} isExternal>
+                          {stakeholder.email}
+                        </Link>
+                      </p>
+                    </VStack>
+                  </div>
+                );
+              })}
+            </GridItem>
+          </Grid>
+        </>
+      );
+    }
+
     return (
       <>
         <Flex justifyContent="space-between" mb={12}>
@@ -179,56 +309,7 @@ function ProjectDetails() {
 
   return (
     <div className="ProjectDetails">
-      <Box p="120px 80px 32px">
-        {+userType > 500 && (
-          <>
-            <Button onClick={handleInterest}>Show Interest</Button>
-            {project && displayProject()}
-          </>
-        )}
-        {+userType < 100 && (
-          <>
-            {/* alert to delete */}
-            {project && (
-              <>
-                <AlertDialog
-                  isOpen={isOpen}
-                  leastDestructiveRef={cancelRef}
-                  onClose={onClose}
-                >
-                  <AlertDialogOverlay>
-                    <AlertDialogContent>
-                      <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        Delete Project
-                      </AlertDialogHeader>
-
-                      <AlertDialogBody>
-                        Are you sure you want to delete{' '}
-                        <i>{project.challengeName}</i>? You can't undo this
-                        action afterwards.
-                      </AlertDialogBody>
-
-                      <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose}>
-                          Cancel
-                        </Button>
-                        <Button
-                          colorScheme="red"
-                          onClick={deleteProject}
-                          ml={3}
-                        >
-                          Delete {project.challengeName}
-                        </Button>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialogOverlay>
-                </AlertDialog>
-                {displayProject()}
-              </>
-            )}
-          </>
-        )}
-      </Box>
+      <Box p="120px 80px 32px">{project && displayProject(+userType)}</Box>
     </div>
   );
 }
