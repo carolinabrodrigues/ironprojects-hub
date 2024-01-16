@@ -65,7 +65,9 @@ function ProjectDetails() {
   return (
     <div className="ProjectDetails">
       <Box p="120px 80px 32px">
-        {+userType > 500 && <button>Show Interest</button>}
+        {+userType > 500 && (
+          <Button onClick={handleInterest}>Show Interest</Button>
+        )}
         {+userType < 100 && (
           <>
             {/* alert to delete */}
@@ -121,7 +123,7 @@ function ProjectDetails() {
                         About the challenge:
                       </Heading>
                       <p>{project.challengeDescription}</p>
-                      <AspectRatio width="100%">
+                      <AspectRatio maxW="560px" ratio={1}>
                         <iframe
                           title={`${project.challengeName}'s video`}
                           src={project.videoSubmission}
