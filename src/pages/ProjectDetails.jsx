@@ -81,13 +81,8 @@ function ProjectDetails() {
   console.log(match);
 
   const handleInterest = async () => {
-    if (!match) {
+    if (!match && typeof match !== null) {
       try {
-        /* const projectsStudents = {
-          projectId: projectId,
-          studentId: userType,
-        }; */
-
         const requestBody = {
           projectId: projectId,
           studentId: userType,
@@ -120,66 +115,6 @@ function ProjectDetails() {
   useEffect(() => {
     handleInterest();
   }, [changeInterest]);
-
-  // NEEDS REVIEW
-
-  /*  const getMatchId = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/projectsStudents`
-      );
-
-      setMatches(response.data);
-
-      const foundMatch = matches.find(
-        match => match.projectId === +projectId && match.studentId === +userType
-      );
-
-      setFoundMatchId(foundMatch.id);
-      setInterested(true);
-      console.log(foundMatchId);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getMatchId();
-  }, [interested]);
-
-  const handleInterest = async () => {
-    if (interested === false) {
-      try {
-        const projectsStudents = {
-          projectId: projectId,
-          studentId: userType,
-        };
-
-        const requestBody = { projectsStudents };
-
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/projectsStudents`,
-          requestBody
-        );
-
-        setInterested(!interested);
-        console.log(interested);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await axios.delete(
-          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
-        );
-
-        setInterested(!interested);
-        console.log(interested);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }; */
 
   const displayProject = user => {
     if (user > 500) {
