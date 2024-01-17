@@ -6,7 +6,8 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import ProjectsList from './components/ProjectsList';
 import User from './pages/User';
-// import ChooseCompany from './pages/ChooseCompany';
+
+// insert handle interest logic to pass to user & project details
 
 function App() {
   return (
