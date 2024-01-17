@@ -55,13 +55,10 @@ function ProjectDetails() {
 
       setMatches(response.data);
       const matchesArray = response.data;
-      console.log('Match Array:', matchesArray);
 
       const foundMatch = matchesArray.find(match => {
-        return match.projectId === projectId && match.studentId === userType;
+        return match.projectId === +projectId && match.studentId === +userType;
       });
-
-      console.log('Found Match:', foundMatch);
 
       if (foundMatch) {
         setMatch(true);
@@ -78,14 +75,12 @@ function ProjectDetails() {
     getMatch();
   }, [match]);
 
-  console.log(match);
-
   const handleInterest = async () => {
-    if (!match && typeof match !== null) {
+    if (!match && match !== null) {
       try {
         const requestBody = {
-          projectId: projectId,
-          studentId: userType,
+          projectId: +projectId,
+          studentId: +userType,
         };
 
         await axios.post(
@@ -94,18 +89,16 @@ function ProjectDetails() {
         );
 
         setMatch(!match);
-        console.log('Match update:', match);
       } catch (error) {
         console.log(error);
       }
-    } else if (match) {
+    } else if (match && match !== null) {
       try {
         await axios.delete(
           `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
         );
 
         setMatch(!match);
-        console.log('Match update:', match);
       } catch (error) {
         console.log(error);
       }
@@ -120,8 +113,8 @@ function ProjectDetails() {
     if (user > 500) {
       return (
         <>
-          <Flex justifyContent='space-between' mb={12}>
-            <Heading as='h1' size='xl'>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
@@ -130,14 +123,14 @@ function ProjectDetails() {
               </Button>
             </HStack>
           </Flex>
-          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
+          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
             <GridItem colSpan={4}>
-              <VStack align='left'>
-                <Heading as='h2' size='md'>
+              <VStack align="left">
+                <Heading as="h2" size="md">
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW='560px' ratio={1}>
+                <AspectRatio maxW="560px" ratio={1}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -149,9 +142,9 @@ function ProjectDetails() {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className='stakeholder-info'>
-                    <VStack align='left'>
-                      <Heading as='h2' size='md'>
+                  <div key={project.id} className="stakeholder-info">
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
                         Stakeholder information:
                       </Heading>
                       <p>
@@ -178,7 +171,7 @@ function ProjectDetails() {
           >
             <AlertDialogOverlay>
               <AlertDialogContent>
-                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
                   Delete Project
                 </AlertDialogHeader>
 
@@ -191,32 +184,32 @@ function ProjectDetails() {
                   <Button ref={cancelRef} onClick={onClose}>
                     Cancel
                   </Button>
-                  <Button colorScheme='red' onClick={deleteProject} ml={3}>
+                  <Button colorScheme="red" onClick={deleteProject} ml={3}>
                     Delete {project.challengeName}
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialogOverlay>
           </AlertDialog>
-          <Flex justifyContent='space-between' mb={12}>
-            <Heading as='h1' size='xl'>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
-              <Button colorScheme='red' onClick={onOpen} variant='link'>
+              <Button colorScheme="red" onClick={onOpen} variant="link">
                 Delete Project
               </Button>
               <EditProjectDetails edited={edited} setEdited={setEdited} />
             </HStack>
           </Flex>
-          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
+          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
             <GridItem colSpan={4}>
-              <VStack align='left'>
-                <Heading as='h2' size='md'>
+              <VStack align="left">
+                <Heading as="h2" size="md">
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW='560px' ratio={1}>
+                <AspectRatio maxW="560px" ratio={1}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -228,9 +221,9 @@ function ProjectDetails() {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className='stakeholder-info'>
-                    <VStack align='left'>
-                      <Heading as='h2' size='md'>
+                  <div key={project.id} className="stakeholder-info">
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
                         Stakeholder information:
                       </Heading>
                       <p>
@@ -251,25 +244,25 @@ function ProjectDetails() {
 
     return (
       <>
-        <Flex justifyContent='space-between' mb={12}>
-          <Heading as='h1' size='xl'>
+        <Flex justifyContent="space-between" mb={12}>
+          <Heading as="h1" size="xl">
             {project.challengeName}
           </Heading>
           <HStack spacing={6}>
-            <Button colorScheme='red' onClick={onOpen} variant='link'>
+            <Button colorScheme="red" onClick={onOpen} variant="link">
               Delete Project
             </Button>
             <EditProjectDetails edited={edited} setEdited={setEdited} />
           </HStack>
         </Flex>
-        <Grid templateColumns='repeat(6, 1fr)' gap={4}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={4}>
           <GridItem colSpan={4}>
-            <VStack align='left'>
-              <Heading as='h2' size='md'>
+            <VStack align="left">
+              <Heading as="h2" size="md">
                 About the challenge:
               </Heading>
               <p>{project.challengeDescription}</p>
-              <AspectRatio maxW='560px' ratio={1}>
+              <AspectRatio maxW="560px" ratio={1}>
                 <iframe
                   title={`${project.challengeName}'s video`}
                   src={project.videoSubmission}
@@ -281,9 +274,9 @@ function ProjectDetails() {
           <GridItem colSpan={2}>
             {project.stakeholders.map(stakeholder => {
               return (
-                <div key={project.id} className='stakeholder-info'>
-                  <VStack align='left'>
-                    <Heading as='h2' size='md'>
+                <div key={project.id} className="stakeholder-info">
+                  <VStack align="left">
+                    <Heading as="h2" size="md">
                       Stakeholder information:
                     </Heading>
                     <p>
@@ -323,8 +316,8 @@ function ProjectDetails() {
   const cancelRef = useRef();
 
   return (
-    <div className='ProjectDetails'>
-      <Box p='120px 80px 32px'>{project && displayProject(+userType)}</Box>
+    <div className="ProjectDetails">
+      <Box p="120px 80px 32px">{project && displayProject(+userType)}</Box>
     </div>
   );
 }
