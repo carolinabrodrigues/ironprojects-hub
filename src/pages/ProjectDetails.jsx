@@ -26,8 +26,10 @@ import {
 function ProjectDetails() {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
-  const [interested, setInterested] = useState(null);
+  // const [interested, setInterested] = useState(null);
   const [matches, setMatches] = useState([]);
+  const [changeInterest, setChangeInterest] = useState(false);
+  const [match, setMatch] = useState(null);
   const [foundMatchId, setFoundMatchId] = useState(null);
 
   const { projectId, userType } = useParams();
@@ -45,26 +47,162 @@ function ProjectDetails() {
     }
   };
 
+  const getMatch = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/projectsStudents`
+      );
+
+      setMatches(response.data);
+      const matchesArray = response.data;
+      console.log('Match Array:', matchesArray);
+
+      const foundMatch = matchesArray.find(match => {
+        return match.projectId === projectId && match.studentId === userType;
+      });
+
+      console.log('Found Match:', foundMatch);
+
+      if (foundMatch) {
+        setMatch(true);
+        setFoundMatchId(foundMatch.id);
+      } else {
+        setMatch(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMatch();
+  }, [match]);
+
+  console.log(match);
+
+  const handleInterest = async () => {
+    if (!match) {
+      try {
+        /* const projectsStudents = {
+          projectId: projectId,
+          studentId: userType,
+        }; */
+
+        const requestBody = {
+          projectId: projectId,
+          studentId: userType,
+        };
+
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/projectsStudents`,
+          requestBody
+        );
+
+        setMatch(!match);
+        console.log('Match update:', match);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (match) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
+        );
+
+        setMatch(!match);
+        console.log('Match update:', match);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleInterest();
+  }, [changeInterest]);
+
+  // NEEDS REVIEW
+
+  /*  const getMatchId = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/projectsStudents`
+      );
+
+      setMatches(response.data);
+
+      const foundMatch = matches.find(
+        match => match.projectId === +projectId && match.studentId === +userType
+      );
+
+      setFoundMatchId(foundMatch.id);
+      setInterested(true);
+      console.log(foundMatchId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMatchId();
+  }, [interested]);
+
+  const handleInterest = async () => {
+    if (interested === false) {
+      try {
+        const projectsStudents = {
+          projectId: projectId,
+          studentId: userType,
+        };
+
+        const requestBody = { projectsStudents };
+
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/projectsStudents`,
+          requestBody
+        );
+
+        setInterested(!interested);
+        console.log(interested);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
+        );
+
+        setInterested(!interested);
+        console.log(interested);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }; */
+
   const displayProject = user => {
     if (user > 500) {
       return (
         <>
-          <Flex justifyContent="space-between" mb={12}>
-            <Heading as="h1" size="xl">
+          <Flex justifyContent='space-between' mb={12}>
+            <Heading as='h1' size='xl'>
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
-              <Button onClick={handleInterest}>Show Interest</Button>
+              <Button onClick={() => setChangeInterest(!changeInterest)}>
+                Show Interest
+              </Button>
             </HStack>
           </Flex>
-          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
             <GridItem colSpan={4}>
-              <VStack align="left">
-                <Heading as="h2" size="md">
+              <VStack align='left'>
+                <Heading as='h2' size='md'>
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW="560px" ratio={1}>
+                <AspectRatio maxW='560px' ratio={1}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -76,9 +214,9 @@ function ProjectDetails() {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className="stakeholder-info">
-                    <VStack align="left">
-                      <Heading as="h2" size="md">
+                  <div key={project.id} className='stakeholder-info'>
+                    <VStack align='left'>
+                      <Heading as='h2' size='md'>
                         Stakeholder information:
                       </Heading>
                       <p>
@@ -105,7 +243,7 @@ function ProjectDetails() {
           >
             <AlertDialogOverlay>
               <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
                   Delete Project
                 </AlertDialogHeader>
 
@@ -118,32 +256,32 @@ function ProjectDetails() {
                   <Button ref={cancelRef} onClick={onClose}>
                     Cancel
                   </Button>
-                  <Button colorScheme="red" onClick={deleteProject} ml={3}>
+                  <Button colorScheme='red' onClick={deleteProject} ml={3}>
                     Delete {project.challengeName}
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialogOverlay>
           </AlertDialog>
-          <Flex justifyContent="space-between" mb={12}>
-            <Heading as="h1" size="xl">
+          <Flex justifyContent='space-between' mb={12}>
+            <Heading as='h1' size='xl'>
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
-              <Button colorScheme="red" onClick={onOpen} variant="link">
+              <Button colorScheme='red' onClick={onOpen} variant='link'>
                 Delete Project
               </Button>
               <EditProjectDetails edited={edited} setEdited={setEdited} />
             </HStack>
           </Flex>
-          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
             <GridItem colSpan={4}>
-              <VStack align="left">
-                <Heading as="h2" size="md">
+              <VStack align='left'>
+                <Heading as='h2' size='md'>
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW="560px" ratio={1}>
+                <AspectRatio maxW='560px' ratio={1}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -155,9 +293,9 @@ function ProjectDetails() {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className="stakeholder-info">
-                    <VStack align="left">
-                      <Heading as="h2" size="md">
+                  <div key={project.id} className='stakeholder-info'>
+                    <VStack align='left'>
+                      <Heading as='h2' size='md'>
                         Stakeholder information:
                       </Heading>
                       <p>
@@ -178,25 +316,25 @@ function ProjectDetails() {
 
     return (
       <>
-        <Flex justifyContent="space-between" mb={12}>
-          <Heading as="h1" size="xl">
+        <Flex justifyContent='space-between' mb={12}>
+          <Heading as='h1' size='xl'>
             {project.challengeName}
           </Heading>
           <HStack spacing={6}>
-            <Button colorScheme="red" onClick={onOpen} variant="link">
+            <Button colorScheme='red' onClick={onOpen} variant='link'>
               Delete Project
             </Button>
             <EditProjectDetails edited={edited} setEdited={setEdited} />
           </HStack>
         </Flex>
-        <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+        <Grid templateColumns='repeat(6, 1fr)' gap={4}>
           <GridItem colSpan={4}>
-            <VStack align="left">
-              <Heading as="h2" size="md">
+            <VStack align='left'>
+              <Heading as='h2' size='md'>
                 About the challenge:
               </Heading>
               <p>{project.challengeDescription}</p>
-              <AspectRatio maxW="560px" ratio={1}>
+              <AspectRatio maxW='560px' ratio={1}>
                 <iframe
                   title={`${project.challengeName}'s video`}
                   src={project.videoSubmission}
@@ -208,9 +346,9 @@ function ProjectDetails() {
           <GridItem colSpan={2}>
             {project.stakeholders.map(stakeholder => {
               return (
-                <div key={project.id} className="stakeholder-info">
-                  <VStack align="left">
-                    <Heading as="h2" size="md">
+                <div key={project.id} className='stakeholder-info'>
+                  <VStack align='left'>
+                    <Heading as='h2' size='md'>
                       Stakeholder information:
                     </Heading>
                     <p>
@@ -245,71 +383,13 @@ function ProjectDetails() {
     getSingleProject();
   }, [projectId, edited]);
 
-  // NEEDS REVIEW
-  const getMatchId = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/projectsStudents`
-      );
-
-      setMatches(response.data);
-
-      const foundMatch = matches.find(
-        match => match.projectId === +projectId && match.studentId === +userType
-      );
-
-      setFoundMatchId(foundMatch.id);
-      setInterested(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // useEffect(() => {
-  //   getMatchId();
-  // }, [interested]);
-
-  const handleInterest = async () => {
-    if (interested === false) {
-      try {
-        const projectsStudents = {
-          projectId: projectId,
-          studentId: userType,
-        };
-
-        const requestBody = { projectsStudents };
-
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/projectsStudents`,
-          requestBody
-        );
-
-        setInterested(!interested);
-        console.log(interested);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await axios.delete(
-          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
-        );
-
-        setInterested(!interested);
-        console.log(interested);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   // alert to delete
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
   return (
-    <div className="ProjectDetails">
-      <Box p="120px 80px 32px">{project && displayProject(+userType)}</Box>
+    <div className='ProjectDetails'>
+      <Box p='120px 80px 32px'>{project && displayProject(+userType)}</Box>
     </div>
   );
 }
