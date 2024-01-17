@@ -48,9 +48,19 @@ function Navbar() {
             Company
           </Button>
         </ChakraLink>
-        <ChakraLink as={ReactRouterLink} to="/501/projects">
+        {/* <ChakraLink as={ReactRouterLink} to="/501/projects">
           <Button variant="solid" size="lg" borderRadius="32px">
             Student
+          </Button>
+        </ChakraLink> */}
+        <ChakraLink as={ReactRouterLink} to="/501/projects">
+          <Button variant="solid" size="lg" borderRadius="32px">
+            Student 1
+          </Button>
+        </ChakraLink>
+        <ChakraLink as={ReactRouterLink} to="/502/projects">
+          <Button variant="solid" size="lg" borderRadius="32px">
+            Student 2
           </Button>
         </ChakraLink>
       </HStack>
