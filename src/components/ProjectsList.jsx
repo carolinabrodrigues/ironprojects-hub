@@ -4,7 +4,18 @@ import { Link } from 'react-router-dom';
 
 import AddProject from './AddProject';
 
-import { Heading, Card, CardBody, Stack, Button, Text } from '@chakra-ui/react';
+import {
+  Heading,
+  Card,
+  CardBody,
+  Stack,
+  Button,
+  Text,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+
+import { ViewIcon } from '@chakra-ui/icons';
 
 function ProjectsList({ userType, setSubmitted, submitted }) {
   const [projects, setProjects] = useState([]);
@@ -37,13 +48,21 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
           <div key={project.id} className='ProjectCard'>
             <Card>
               <CardBody>
-                <Stack spacing='7'>
-                  <Heading size='md'>{project.challengeName}</Heading>
-                  <Text fontSize='md'>{project.challengeDescription}</Text>
-                  <Link to={`${project.id}`}>
-                    <Button>View more details</Button>
-                  </Link>
-                </Stack>
+                <Flex>
+                  <Stack spacing='7'>
+                    <Heading size='md'>{project.challengeName}</Heading>
+                    <Text fontSize='md'>{project.challengeDescription}</Text>
+                  </Stack>
+                  <Spacer />
+                  <Stack>
+                    <Link to={`${project.id}`}>
+                      <Button>
+                        <ViewIcon mr={2} />
+                        View more
+                      </Button>
+                    </Link>
+                  </Stack>
+                </Flex>
               </CardBody>
             </Card>
           </div>
@@ -64,7 +83,9 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
                       <Heading size='md'>{project.challengeName}</Heading>
                       <Text fontSize='md'>{project.challengeDescription}</Text>
                       <Link to={`${project.id}`}>
-                        <Button>View more details</Button>
+                        <Button>
+                          <ViewIcon mr={2} /> View more
+                        </Button>
                       </Link>
                     </Stack>
                   </CardBody>

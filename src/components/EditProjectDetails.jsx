@@ -19,6 +19,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
+import { SettingsIcon } from '@chakra-ui/icons';
+
 function EditProjectDetails({ edited, setEdited }) {
   const { projectId } = useParams();
 
@@ -89,23 +91,26 @@ function EditProjectDetails({ edited, setEdited }) {
   return (
     /* Drawer */
     <>
-      <div className="EditProject">
-        <Button onClick={editingProject}>Edit Project</Button>
-        <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+      <div className='EditProject'>
+        <Button onClick={editingProject}>
+          {' '}
+          <SettingsIcon mr={2} /> Edit
+        </Button>
+        <Drawer placement='right' onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">Edit Project</DrawerHeader>
+            <DrawerHeader borderBottomWidth='1px'>Edit Project</DrawerHeader>
             <DrawerBody>
-              <form method="post" onSubmit={handleSubmit} id="my-form">
-                <Stack spacing="24px">
+              <form method='post' onSubmit={handleSubmit} id='my-form'>
+                <Stack spacing='24px'>
                   <Box>
-                    <FormLabel htmlFor="name">Stakeholder Name:</FormLabel>
+                    <FormLabel htmlFor='name'>Stakeholder Name:</FormLabel>
                     <Input
                       ref={firstField}
-                      id="name"
-                      placeholder="Please enter user name"
-                      type="text"
-                      name="name"
+                      id='name'
+                      placeholder='Please enter user name'
+                      type='text'
+                      name='name'
                       onChange={e => setName(e.target.value)}
                       value={name}
                       required
@@ -113,11 +118,11 @@ function EditProjectDetails({ edited, setEdited }) {
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor="email">Stakeholder Email:</FormLabel>
+                    <FormLabel htmlFor='email'>Stakeholder Email:</FormLabel>
                     <Input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type='email'
+                      name='email'
+                      id='email'
                       onChange={e => setEmail(e.target.value)}
                       value={email}
                       required
@@ -125,13 +130,13 @@ function EditProjectDetails({ edited, setEdited }) {
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor="challengeName">
+                    <FormLabel htmlFor='challengeName'>
                       Challenge Name:
                     </FormLabel>
                     <Input
-                      type="text"
-                      name="challengeName"
-                      id="challengeName"
+                      type='text'
+                      name='challengeName'
+                      id='challengeName'
                       onChange={e => setChallengeName(e.target.value)}
                       value={challengeName}
                       required
@@ -139,14 +144,14 @@ function EditProjectDetails({ edited, setEdited }) {
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor="challengeDescription">
+                    <FormLabel htmlFor='challengeDescription'>
                       Challenge Description:
                     </FormLabel>
                     <Textarea
-                      name="challengeDescription"
-                      id="challengeDescription"
-                      cols="30"
-                      rows="10"
+                      name='challengeDescription'
+                      id='challengeDescription'
+                      cols='30'
+                      rows='10'
                       onChange={e => setChallengeDescription(e.target.value)}
                       value={challengeDescription}
                       required
@@ -154,14 +159,14 @@ function EditProjectDetails({ edited, setEdited }) {
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor="videoSubmission">
+                    <FormLabel htmlFor='videoSubmission'>
                       Pitch Video URL
                     </FormLabel>
                     <InputGroup>
                       <Input
-                        type="url"
-                        name="videoSubmission"
-                        id="videoSubmission"
+                        type='url'
+                        name='videoSubmission'
+                        id='videoSubmission'
                         onChange={e => setVideoSubmission(e.target.value)}
                         value={videoSubmission}
                         required
@@ -171,14 +176,14 @@ function EditProjectDetails({ edited, setEdited }) {
                 </Stack>
               </form>
             </DrawerBody>
-            <DrawerFooter borderTopWidth="1px">
-              <Button variant="outline" mr={3} onClick={onClose}>
+            <DrawerFooter borderTopWidth='1px'>
+              <Button variant='outline' mr={3} onClick={onClose}>
                 Cancel
               </Button>
               <Button
-                colorScheme="blue"
-                type="submit"
-                form="my-form"
+                colorScheme='blue'
+                type='submit'
+                form='my-form'
                 onClick={onClose}
               >
                 Save Changes

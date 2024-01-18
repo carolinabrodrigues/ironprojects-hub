@@ -110,13 +110,14 @@ function ProjectDetails() {
     if (user > 500) {
       return (
         <>
-          <Flex justifyContent="space-between" mb={12}>
-            <Heading as="h1" size="xl">
+          <Flex justifyContent='space-between' mb={12}>
+            <Heading as='h1' size='xl'>
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
+              {/* new - button shows in which stage is the backend */}
               <Button onClick={() => setChangeInterest(!changeInterest)}>
-                Show Interest
+                {match ? 'Not Interested' : 'Show Interest'}
               </Button>
             </HStack>
           </Flex>
@@ -125,8 +126,8 @@ function ProjectDetails() {
     } else if (user < 100) {
       return (
         <>
-          <Flex justifyContent="space-between" mb={12}>
-            <Heading as="h1" size="xl">
+          <Flex justifyContent='space-between' mb={12}>
+            <Heading as='h1' size='xl'>
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
@@ -142,20 +143,21 @@ function ProjectDetails() {
       );
     }
   };
+
   // displaying page
   return (
-    <div className="ProjectDetails">
-      <Box p="120px 80px 32px">
+    <div className='ProjectDetails'>
+      <Box p='120px 80px 32px'>
         {project && displayHeader(+userType)}
         {project && (
-          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
             <GridItem colSpan={4}>
-              <VStack align="left">
-                <Heading as="h2" size="md">
+              <VStack align='left'>
+                <Heading as='h2' size='md'>
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW="560px" ratio={1}>
+                <AspectRatio maxW='560px' ratio={1}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -167,9 +169,9 @@ function ProjectDetails() {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className="stakeholder-info">
-                    <VStack align="left">
-                      <Heading as="h2" size="md">
+                  <div key={project.id} className='stakeholder-info'>
+                    <VStack align='left'>
+                      <Heading as='h2' size='md'>
                         Stakeholder information:
                       </Heading>
                       <p>

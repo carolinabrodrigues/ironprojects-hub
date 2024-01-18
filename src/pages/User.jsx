@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardBody,
   Stack,
+  Flex,
+  Spacer,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
@@ -69,39 +71,50 @@ function User() {
                 </CardHeader>
 
                 <CardBody>
-                  <Stack spacing='4'>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        Company Name
-                      </Heading>
-                      <Text pt='2' fontSize='sm'>
-                        {user.name}
-                      </Text>
+                  <Flex>
+                    <Box w='250px'>
+                      <Stack>
+                        <Box>
+                          <Heading size='xs' textTransform='uppercase'>
+                            Company Name
+                          </Heading>
+                          <Text pt='2' fontSize='sm'>
+                            {user.name}
+                          </Text>
+                        </Box>
+
+                        <Box>
+                          <Heading size='xs' textTransform='uppercase'>
+                            <Link href={user.website} isExternal>
+                              Website <ExternalLinkIcon mx='2px' />
+                            </Link>
+                          </Heading>
+                        </Box>
+                      </Stack>
                     </Box>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        <Link href={user.website} isExternal>
-                          Website <ExternalLinkIcon mx='2px' />
-                        </Link>
-                      </Heading>
+                    <Spacer />
+                    <Box w='250px'>
+                      <Stack>
+                        <Box>
+                          <Heading size='xs' textTransform='uppercase'>
+                            User
+                          </Heading>
+                          <Text pt='2' fontSize='sm'>
+                            {user.userName}
+                          </Text>
+                        </Box>
+
+                        <Box>
+                          <Heading size='xs' textTransform='uppercase'>
+                            Email
+                          </Heading>
+                          <Text pt='2' fontSize='sm'>
+                            {user.userEmail}
+                          </Text>
+                        </Box>
+                      </Stack>
                     </Box>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        User
-                      </Heading>
-                      <Text pt='2' fontSize='sm'>
-                        {user.userName}
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        Email
-                      </Heading>
-                      <Text pt='2' fontSize='sm'>
-                        {user.userEmail}
-                      </Text>
-                    </Box>
-                  </Stack>
+                  </Flex>
                 </CardBody>
               </Card>
             </Box>

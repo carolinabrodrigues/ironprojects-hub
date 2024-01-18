@@ -12,6 +12,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 
+import { DeleteIcon } from '@chakra-ui/icons';
+
 function DeleteProject({ userType, projectId, project }) {
   // alert to delete
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,9 +33,9 @@ function DeleteProject({ userType, projectId, project }) {
   };
 
   return (
-    <div className="DeleteProject">
-      <Button colorScheme="red" onClick={onOpen} variant="link">
-        Delete Project
+    <div className='DeleteProject'>
+      <Button colorScheme='red' onClick={onOpen} variant='link'>
+        <DeleteIcon mx={2} /> Delete
       </Button>
 
       <AlertDialog
@@ -43,7 +45,7 @@ function DeleteProject({ userType, projectId, project }) {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
               Delete Project
             </AlertDialogHeader>
 
@@ -56,7 +58,7 @@ function DeleteProject({ userType, projectId, project }) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={deleteProject} ml={3}>
+              <Button colorScheme='red' onClick={deleteProject} ml={3}>
                 Delete {project.challengeName}
               </Button>
             </AlertDialogFooter>
