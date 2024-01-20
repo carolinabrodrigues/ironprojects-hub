@@ -1,16 +1,14 @@
 # IronProjects Hub
 
-## Description
+Application to manage project submissions for academic projects:
+* Companies can add and edit their projects but do not have access to all projects.
+* Students can see the projects list and details, and pick their favorite ones.
 
-Application to manage projects submission for our UX/UI students’ final project.
-
-Companies will be able to add and edit their projects, but will not have access to all projects.
-
-Students will be able to see the projects list and details, and pick their favourite ones.
+<br/>
 
 ## Data
 
-Projects
+**Projects**
 
 ```json
 {
@@ -30,7 +28,7 @@ Projects
 }
 ```
 
-Companies
+**Companies**
 
 ```json
 {
@@ -44,7 +42,7 @@ Companies
 }
 ```
 
-Students
+**Students**
 
 ```json
 {
@@ -53,31 +51,43 @@ Students
   “email”: String,
   “password”: String,
   "cohort": String,
-  "projectId": Array,
 }
 ```
 
-## API's
+**Projects-Students Match**
+```json
+{
+  "id": Number,
+  "projectId": Number,
+  “studentId”: Number,
+}
+```
 
-After MVP: https://worldtimeapi.org/
+<br/>
 
 ## Packages
+**Styling Component Library:** 
+* [Chakra UI](https://chakra-ui.com/) 
 
-- Styling packages
+**HTTP Requests Package:**
+* [Axios](https://axios-http.com/docs/intro)
 
-- Axios
+**Other Packages:**
+* [React Router Dom](https://www.npmjs.com/package/react-router-dom)
 
-- React Router Dom
+<br/>
 
 ## Links
 
 ### Git
 
-Frontend: [Repository Link Placeholder]()
+[Frontend Repository](https://github.com/carolinabrods/ironprojects-hub/)
 
-Backend: [Repository Link Placeholder](https://github.com/ritadomar/ironprojects-hub-backend)
+[Backend Repository](https://github.com/ritadomar/ironprojects-hub-backend)
 
-[Deploy Link Placeholder]()
+[Deploy Link Placeholder](https://ironprojects-hub.netlify.app/)
+
+<br/>
 
 ### Contributors
 
