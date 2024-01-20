@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -17,14 +18,18 @@ import {
   AspectRatio,
 } from '@chakra-ui/react';
 
-function ProjectDetails() {
+function ProjectDetails({
+  setMatches,
+  changeInterest,
+  setChangeInterest,
+  match,
+  setMatch,
+  foundMatchId,
+  setFoundMatchId,
+}) {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
   // const [interested, setInterested] = useState(null);
-  const [matches, setMatches] = useState([]);
-  const [changeInterest, setChangeInterest] = useState(false);
-  const [match, setMatch] = useState(null);
-  const [foundMatchId, setFoundMatchId] = useState(null);
 
   const { projectId, userType } = useParams();
 
