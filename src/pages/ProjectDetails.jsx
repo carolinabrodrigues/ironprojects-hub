@@ -19,13 +19,11 @@ import {
 } from '@chakra-ui/react';
 
 function ProjectDetails({
-  setMatches,
   changeInterest,
   setChangeInterest,
   match,
-  setMatch,
-  foundMatchId,
-  setFoundMatchId,
+  defineMatch,
+  handleInterest,
 }) {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
@@ -49,64 +47,7 @@ function ProjectDetails({
     getSingleProject();
   }, [projectId, edited]);
 
-  const getMatch = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/projectsStudents`
-      );
-
-      setMatches(response.data);
-      const matchesArray = response.data;
-
-      const foundMatch = matchesArray.find(match => {
-        return match.projectId === +projectId && match.studentId === +userType;
-      });
-
-      if (foundMatch) {
-        setMatch(true);
-        setFoundMatchId(foundMatch.id);
-      } else {
-        setMatch(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getMatch();
-  }, [match]);
-
-  const handleInterest = async () => {
-    if (!match && match !== null) {
-      try {
-        const requestBody = {
-          projectId: +projectId,
-          studentId: +userType,
-        };
-
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/projectsStudents`,
-          requestBody
-        );
-
-        setMatch(!match);
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (match && match !== null) {
-      try {
-        await axios.delete(
-          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatchId}`
-        );
-
-        setMatch(!match);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
+  // to repeat on User
   useEffect(() => {
     handleInterest();
   }, [changeInterest]);
