@@ -13,26 +13,26 @@ import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 function Navbar() {
   return (
     <Box
-      as="nav"
-      display="flex"
-      justifyContent="space-between"
-      p="32px 80px"
-      pos="fixed"
-      w="100vw"
-      zIndex="1"
+      as='nav'
+      display='flex'
+      justifyContent='space-between'
+      p='32px 80px'
+      pos='fixed'
+      w='100vw'
+      zIndex='1'
     >
-      <HStack spacing="48px">
-        <ChakraLink as={ReactRouterLink} to="/">
-          <Image src={ironhackLogoDark} h="32px" />
+      <HStack spacing='48px'>
+        <ChakraLink as={ReactRouterLink} to='/'>
+          <Image src={ironhackLogoDark} h='32px' />
         </ChakraLink>
         {/* <Link to='/'>
         <button>How it works</button>
       </Link> */}
-        <ChakraLink as={ReactRouterLink} to="">
+        <ChakraLink as={ReactRouterLink} to='/how-it-works'>
           How it Works
         </ChakraLink>
       </HStack>
-      <HStack spacing="24px">
+      <HStack spacing='24px'>
         {/* <ChakraLink as={ReactRouterLink} to="">
           <Button variant="link" size="lg" borderRadius="32px">
             Register
@@ -43,8 +43,8 @@ function Navbar() {
             Log In
           </Button>
         </ChakraLink> */}
-        <ChakraLink as={ReactRouterLink} to="/2/projects">
-          <Button variant="solid" size="lg" borderRadius="32px">
+        <ChakraLink as={ReactRouterLink} to='/2/projects'>
+          <Button variant='solid' size='lg' borderRadius='32px'>
             Company
           </Button>
         </ChakraLink>
@@ -53,13 +53,13 @@ function Navbar() {
             Student
           </Button>
         </ChakraLink> */}
-        <ChakraLink as={ReactRouterLink} to="/501/projects">
-          <Button variant="solid" size="lg" borderRadius="32px">
+        <ChakraLink as={ReactRouterLink} to='/501/projects'>
+          <Button variant='solid' size='lg' borderRadius='32px'>
             Student 1
           </Button>
         </ChakraLink>
-        <ChakraLink as={ReactRouterLink} to="/502/projects">
-          <Button variant="solid" size="lg" borderRadius="32px">
+        <ChakraLink as={ReactRouterLink} to='/502/projects'>
+          <Button variant='solid' size='lg' borderRadius='32px'>
             Student 2
           </Button>
         </ChakraLink>
