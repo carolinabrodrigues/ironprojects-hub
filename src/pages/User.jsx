@@ -14,6 +14,7 @@ import {
   Stack,
   Flex,
   Spacer,
+  Container,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
@@ -53,10 +54,10 @@ function User() {
   }, [userType]);
 
   return (
-    <div className='UserPage'>
-      <Box pt='120px' mx={10}>
+    <div className="UserPage">
+      <Box pt="120px" mx={10}>
         {user && (
-          <Heading as='h1' my={17}>
+          <Heading as="h1" my={17}>
             Welcome, {user.name}
           </Heading>
         )}
@@ -64,60 +65,61 @@ function User() {
         {/* if company */}
         {user && +userType < 100 && (
           <>
-            <Box align='center' my={17}>
-              <Card align='center' maxW='xl'>
+            {/* <Box align="left" my={17}> */}
+            <Container maxW="container.3xl" my={17} align="left" p="0">
+              <Card align="left">
                 <CardHeader>
-                  <Heading size='md'>Company Profile</Heading>
+                  <Heading size="md">Company Profile</Heading>
                 </CardHeader>
 
                 <CardBody>
                   <Flex>
-                    <Box w='250px'>
-                      <Stack>
+                    <Box w="250px">
+                      <Stack spacing={6}>
                         <Box>
-                          <Heading size='xs' textTransform='uppercase'>
-                            Company Name
-                          </Heading>
-                          <Text pt='2' fontSize='sm'>
-                            {user.name}
-                          </Text>
-                        </Box>
-
-                        <Box>
-                          <Heading size='xs' textTransform='uppercase'>
-                            <Link href={user.website} isExternal>
-                              Website <ExternalLinkIcon mx='2px' />
-                            </Link>
-                          </Heading>
-                        </Box>
-                      </Stack>
-                    </Box>
-                    <Spacer />
-                    <Box w='250px'>
-                      <Stack>
-                        <Box>
-                          <Heading size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="xs" textTransform="uppercase">
                             User
                           </Heading>
-                          <Text pt='2' fontSize='sm'>
+                          <Text pt="2" fontSize="sm">
                             {user.userName}
                           </Text>
                         </Box>
 
                         <Box>
-                          <Heading size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="xs" textTransform="uppercase">
                             Email
                           </Heading>
-                          <Text pt='2' fontSize='sm'>
+                          <Text pt="2" fontSize="sm">
                             {user.userEmail}
                           </Text>
+                        </Box>
+                      </Stack>
+                    </Box>
+                    <Box w="250px">
+                      <Stack spacing={6}>
+                        <Box>
+                          <Heading as="h3" size="xs" textTransform="uppercase">
+                            Company Name
+                          </Heading>
+                          <Text pt="2" fontSize="sm">
+                            {user.name}
+                          </Text>
+                        </Box>
+
+                        <Box>
+                          <Heading as="h3" size="xs" textTransform="uppercase">
+                            <Link href={user.website} isExternal>
+                              Website <ExternalLinkIcon mx="2px" />
+                            </Link>
+                          </Heading>
                         </Box>
                       </Stack>
                     </Box>
                   </Flex>
                 </CardBody>
               </Card>
-            </Box>
+            </Container>
+            {/* </Box> */}
 
             <ProjectsList
               userType={userType}

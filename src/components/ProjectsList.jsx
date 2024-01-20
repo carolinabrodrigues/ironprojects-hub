@@ -22,6 +22,7 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
 
   const getProjects = async () => {
     try {
+      console.log('logging projects', projects);
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/projects`
       );
@@ -45,13 +46,13 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
     } else if (+user > 500) {
       return projects.map(project => {
         return (
-          <div key={project.id} className='ProjectCard'>
+          <div key={project.id} className="ProjectCard">
             <Card>
               <CardBody>
                 <Flex>
-                  <Stack spacing='7'>
-                    <Heading size='md'>{project.challengeName}</Heading>
-                    <Text fontSize='md'>{project.challengeDescription}</Text>
+                  <Stack spacing="7">
+                    <Heading size="md">{project.challengeName}</Heading>
+                    <Text fontSize="md">{project.challengeDescription}</Text>
                   </Stack>
                   <Spacer />
                   <Stack>
@@ -76,12 +77,12 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
           {projects.length === 0 && <Text>Loading projects</Text>}
           {filteredProjects.map(project => {
             return (
-              <div key={project.id} className='ProjectCard'>
+              <div key={project.id} className="ProjectCard">
                 <Card>
                   <CardBody>
-                    <Stack spacing='7'>
-                      <Heading size='md'>{project.challengeName}</Heading>
-                      <Text fontSize='md'>{project.challengeDescription}</Text>
+                    <Stack spacing="7">
+                      <Heading size="md">{project.challengeName}</Heading>
+                      <Text fontSize="md">{project.challengeDescription}</Text>
                       <Link to={`${project.id}`}>
                         <Button>
                           <ViewIcon mr={2} /> View more
@@ -101,8 +102,8 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
   };
 
   return (
-    <div className='ProjectsList'>
-      <Heading as='h1' my={17}>
+    <div className="ProjectsList">
+      <Heading as="h1" my={17}>
         Projects
       </Heading>
       {projects.length > 0 && showProjects(userType)}
