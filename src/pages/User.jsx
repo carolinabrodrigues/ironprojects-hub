@@ -18,7 +18,15 @@ import {
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
-function User() {
+function User({
+  setMatches,
+  changeInterest,
+  setChangeInterest,
+  match,
+  setMatch,
+  foundMatchId,
+  setFoundMatchId,
+}) {
   const [user, setUser] = useState(null);
   // to be used on projects list & details
   const [submitted, setSubmitted] = useState(false);
@@ -69,7 +77,9 @@ function User() {
             <Container maxW="container.3xl" my={17} align="left" p="0">
               <Card align="left">
                 <CardHeader>
-                  <Heading size="md">Company Profile</Heading>
+                  <Heading as="h2" size="md">
+                    Company Profile
+                  </Heading>
                 </CardHeader>
 
                 <CardBody>
@@ -131,13 +141,23 @@ function User() {
 
         {/* if student */}
         {user && +userType > 500 && (
-          <Box>
-            <ProjectsList
-              userType={userType}
-              submitted={submitted}
-              setSubmitted={setSubmitted}
-            />
-          </Box>
+          <>
+            <Box>
+              <ProjectsList
+                userType={userType}
+                submitted={submitted}
+                setSubmitted={setSubmitted}
+                setMatches={setMatches}
+                changeInterest={changeInterest}
+                setChangeInterest={setChangeInterest}
+                match={match}
+                setMatch={setMatch}
+                foundMatchId={foundMatchId}
+                setFoundMatchId={setFoundMatchId}
+              />
+            </Box>
+            <Box></Box>
+          </>
         )}
       </Box>
     </div>

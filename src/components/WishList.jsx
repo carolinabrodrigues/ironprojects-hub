@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import AddProject from './AddProject';
-import WishList from './WishList';
-
 import {
   Heading,
   Card,
@@ -18,7 +15,7 @@ import {
 
 import { ViewIcon } from '@chakra-ui/icons';
 
-function ProjectsList({ userType, setSubmitted, submitted }) {
+function WishList({ userType, setSubmitted, submitted }) {
   const [projects, setProjects] = useState([]);
 
   const getProjects = async () => {
@@ -114,10 +111,10 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
   };
 
   return (
-    <div className="ProjectsList">
+    <div className="WishList">
       {projects.length > 0 && showProjects(userType)}
     </div>
   );
 }
 
-export default ProjectsList;
+export default WishList;
