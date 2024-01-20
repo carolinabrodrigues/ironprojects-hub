@@ -33,10 +33,9 @@ function App() {
     const foundMatch = matches.find(match => {
       return match.projectId === +project && match.studentId === +user;
     });
-
     if (foundMatch) {
-      setMatch(true);
       setFoundMatchId(foundMatch.id);
+      setMatch(true);
     } else {
       setMatch(false);
     }
@@ -77,12 +76,12 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
-          path='/:userType/projects'
+          path="/:userType/projects"
           element={
             <User
               changeInterest={changeInterest}
@@ -90,22 +89,32 @@ function App() {
               match={match}
               defineMatch={defineMatch}
               handleInterest={handleInterest}
+              matches={matches}
+              setMatches={setMatches}
+              foundMatchId={foundMatchId}
+              setFoundMatchId={setFoundMatchId}
             />
           }
         />
         <Route
-          path='/:userType/projects/:projectId'
+          path="/:userType/projects/:projectId"
           element={
             <ProjectDetails
               changeInterest={changeInterest}
               setChangeInterest={setChangeInterest}
               match={match}
+              setMatch={setMatch}
               defineMatch={defineMatch}
               handleInterest={handleInterest}
+              matches={matches}
+              setMatches={setMatches}
+              foundMatchId={foundMatchId}
+              setFoundMatchId={setFoundMatchId}
+              getMatch={getMatch}
             />
           }
         />
-        <Route path='/how-it-works' element={<HowItWorks />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
       </Routes>
     </div>
   );

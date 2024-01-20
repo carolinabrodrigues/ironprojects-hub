@@ -1,4 +1,5 @@
 import ProjectsList from '../components/ProjectsList';
+import WishList from '../components/WishList';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -26,10 +27,15 @@ function User({
   setMatch,
   foundMatchId,
   setFoundMatchId,
+  defineMatch,
+  handleInterest,
+  matches,
 }) {
   const [user, setUser] = useState(null);
   // to be used on projects list & details
   const [submitted, setSubmitted] = useState(false);
+
+  const [projects, setProjects] = useState([]);
 
   const { userType } = useParams();
   console.log(userType);
@@ -60,6 +66,22 @@ function User({
   useEffect(() => {
     getUser();
   }, [userType]);
+
+  const getProjects = async () => {
+    try {
+      console.log('logging projects', projects);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/projects`
+      );
+      setProjects(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProjects();
+  }, [submitted, handleInterest]);
 
   return (
     <div className="UserPage">
@@ -135,6 +157,7 @@ function User({
               userType={userType}
               submitted={submitted}
               setSubmitted={setSubmitted}
+              projects={projects}
             />
           </>
         )}
@@ -143,17 +166,35 @@ function User({
         {user && +userType > 500 && (
           <>
             <Box>
+              <WishList
+                userType={userType}
+                submitted={submitted}
+                setSubmitted={setSubmitted}
+                changeInterest={changeInterest}
+                setChangeInterest={setChangeInterest}
+                match={match}
+                defineMatch={defineMatch}
+                handleInterest={handleInterest}
+                matches={matches}
+                setMatches={setMatches}
+                foundMatchId={foundMatchId}
+                setFoundMatchId={setFoundMatchId}
+                projects={projects}
+              />
               <ProjectsList
                 userType={userType}
                 submitted={submitted}
                 setSubmitted={setSubmitted}
-                setMatches={setMatches}
                 changeInterest={changeInterest}
                 setChangeInterest={setChangeInterest}
                 match={match}
-                setMatch={setMatch}
+                defineMatch={defineMatch}
+                handleInterest={handleInterest}
+                matches={matches}
+                setMatches={setMatches}
                 foundMatchId={foundMatchId}
                 setFoundMatchId={setFoundMatchId}
+                projects={projects}
               />
             </Box>
             <Box></Box>

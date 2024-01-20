@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import AddProject from './AddProject';
-import WishList from './WishList';
 
 import {
   Heading,
@@ -18,25 +17,7 @@ import {
 
 import { ViewIcon } from '@chakra-ui/icons';
 
-function ProjectsList({ userType, setSubmitted, submitted }) {
-  const [projects, setProjects] = useState([]);
-
-  const getProjects = async () => {
-    try {
-      console.log('logging projects', projects);
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/projects`
-      );
-      setProjects(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getProjects();
-  }, [submitted]);
-
+function ProjectsList({ userType, setSubmitted, submitted, projects }) {
   const showProjects = user => {
     const filteredProjects = projects.filter(
       project => project.companyId === +user
@@ -45,36 +26,42 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
     if (+user > 500 && projects.length === 0) {
       return <p>No projects yet!</p>;
     } else if (+user > 500) {
-      return projects.map(project => {
-        return (
-          <>
-            <Heading as="h2" size="md" my={17}>
-              All Projects
-            </Heading>
-            <div key={project.id} className="ProjectCard">
-              <Card>
-                <CardBody>
-                  <Flex>
-                    <Stack spacing="7">
-                      <Heading size="md">{project.challengeName}</Heading>
-                      <Text fontSize="md">{project.challengeDescription}</Text>
-                    </Stack>
-                    <Spacer />
-                    <Stack>
-                      <Link to={`${project.id}`}>
-                        <Button>
-                          <ViewIcon mr={2} />
-                          View more
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Flex>
-                </CardBody>
-              </Card>
-            </div>
-          </>
-        );
-      });
+      return (
+        <>
+          <Heading as="h2" size="md" my={17}>
+            All Projects
+          </Heading>
+          {projects.map(project => {
+            return (
+              <>
+                <div key={project.id} className="ProjectCard">
+                  <Card>
+                    <CardBody>
+                      <Flex>
+                        <Stack spacing="7">
+                          <Heading size="md">{project.challengeName}</Heading>
+                          <Text fontSize="md">
+                            {project.challengeDescription}
+                          </Text>
+                        </Stack>
+                        <Spacer />
+                        <Stack>
+                          <Link to={`${project.id}`}>
+                            <Button>
+                              <ViewIcon mr={2} />
+                              View more
+                            </Button>
+                          </Link>
+                        </Stack>
+                      </Flex>
+                    </CardBody>
+                  </Card>
+                </div>
+              </>
+            );
+          })}
+        </>
+      );
     } else if (+user < 100) {
       /* if company */
       return (
@@ -114,9 +101,7 @@ function ProjectsList({ userType, setSubmitted, submitted }) {
   };
 
   return (
-    <div className="ProjectsList">
-      {projects.length > 0 && showProjects(userType)}
-    </div>
+    <div className="ProjectsList">{projects && showProjects(userType)}</div>
   );
 }
 
