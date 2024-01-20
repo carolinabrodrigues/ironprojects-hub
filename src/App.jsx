@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import User from './pages/User';
 import HowItWorks from './pages/HowItWorks';
+import ErrorPage from './pages/ErrorPage';
 
 // insert handle interest logic to pass to user & project details
 
@@ -106,6 +107,7 @@ function App() {
           }
         />
         <Route path='/how-it-works' element={<HowItWorks />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </div>
   );
