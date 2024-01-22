@@ -108,10 +108,6 @@ function App() {
               defineMatch={defineMatch}
               handleInterest={handleInterest}
               matches={matches}
-              setMatches={setMatches}
-              foundMatchId={foundMatchId}
-              setFoundMatchId={setFoundMatchId}
-              getMatch={getMatch}
             />
           }
         />

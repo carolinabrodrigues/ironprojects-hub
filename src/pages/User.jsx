@@ -38,7 +38,6 @@ function User({
   const [projects, setProjects] = useState([]);
 
   const { userType } = useParams();
-  console.log(userType);
 
   // to get the user name - if it's company or student - NOT FINISHED
   const getUser = async () => {
@@ -69,7 +68,6 @@ function User({
 
   const getProjects = async () => {
     try {
-      console.log('logging projects', projects);
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/projects`
       );
@@ -157,6 +155,15 @@ function User({
               userType={userType}
               submitted={submitted}
               setSubmitted={setSubmitted}
+              changeInterest={changeInterest}
+              setChangeInterest={setChangeInterest}
+              match={match}
+              defineMatch={defineMatch}
+              handleInterest={handleInterest}
+              matches={matches}
+              setMatches={setMatches}
+              foundMatchId={foundMatchId}
+              setFoundMatchId={setFoundMatchId}
               projects={projects}
             />
           </>
@@ -173,7 +180,6 @@ function User({
                 changeInterest={changeInterest}
                 setChangeInterest={setChangeInterest}
                 match={match}
-                defineMatch={defineMatch}
                 handleInterest={handleInterest}
                 matches={matches}
                 setMatches={setMatches}

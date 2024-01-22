@@ -4,10 +4,10 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import EditProjectDetails from '../components/EditProjectDetails';
 import DeleteProject from '../components/DeleteProject';
+import InterestButton from '../components/InterestButton';
 
 import {
   Box,
-  Button,
   Heading,
   HStack,
   VStack,
@@ -26,10 +26,6 @@ function ProjectDetails({
   defineMatch,
   handleInterest,
   matches,
-  setMatches,
-  foundMatchId,
-  setFoundMatchId,
-  getMatch,
 }) {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
@@ -56,15 +52,6 @@ function ProjectDetails({
     };
   }, [projectId, edited]);
 
-  // to repeat on User
-  useEffect(() => {
-    handleInterest(projectId, userType);
-  }, [changeInterest]);
-
-  useEffect(() => {
-    defineMatch(projectId, userType);
-  }, [matches, match]);
-
   const displayHeader = user => {
     if (user > 500) {
       return (
@@ -74,10 +61,16 @@ function ProjectDetails({
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
-              {/* new - button shows in which stage is the backend */}
-              <Button onClick={() => setChangeInterest(!changeInterest)}>
-                {match ? 'Not Interested' : 'Show Interest'}
-              </Button>
+              <InterestButton
+                setChangeInterest={setChangeInterest}
+                changeInterest={changeInterest}
+                userType={userType}
+                projectId={projectId}
+                match={match}
+                defineMatch={defineMatch}
+                handleInterest={handleInterest}
+                matches={matches}
+              />
             </HStack>
           </Flex>
         </>

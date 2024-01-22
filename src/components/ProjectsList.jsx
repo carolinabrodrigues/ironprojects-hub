@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import AddProject from './AddProject';
+import InterestButton from './InterestButton';
 
 import {
   Heading,
@@ -17,7 +17,36 @@ import {
 
 import { ViewIcon } from '@chakra-ui/icons';
 
-function ProjectsList({ userType, setSubmitted, submitted, projects }) {
+function ProjectsList({
+  userType,
+  setSubmitted,
+  submitted,
+  projects,
+  changeInterest,
+  setChangeInterest,
+  match,
+  handleInterest,
+  matches,
+  setFoundMatchId,
+  setMatch,
+  defineMatch,
+  foundMatchId,
+}) {
+  // const [projectId, setProjectId] = useState(0);
+
+  // useEffect(() => {
+  //   handleInterest(projectId, userType);
+  // }, [changeInterest]);
+
+  // const projectListInterest = id => {
+  //   setProjectId(id);
+  //   setChangeInterest(!changeInterest);
+  // };
+
+  // useEffect(() => {
+  //   defineMatch(projectId, userType);
+  // }, [matches, match]);
+
   const showProjects = user => {
     const filteredProjects = projects.filter(
       project => project.companyId === +user
@@ -52,6 +81,17 @@ function ProjectsList({ userType, setSubmitted, submitted, projects }) {
                               View more
                             </Button>
                           </Link>
+                          {/* <InterestButton
+                            setChangeInterest={setChangeInterest}
+                            changeInterest={changeInterest}
+                            userType={userType}
+                            projectId={project.id}
+                            match={match}
+                            defineMatch={defineMatch}
+                            handleInterest={handleInterest}
+                            matches={matches}
+                            foundMatchId={foundMatchId}
+                          /> */}
                         </Stack>
                       </Flex>
                     </CardBody>
