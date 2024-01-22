@@ -25,10 +25,10 @@ function WishList({ matches, userType, projects }) {
     const checkMatches = project => {
       for (let i = 0; i < filterStudentMatches.length; i++) {
         if (filterStudentMatches[i] === project.id) {
-          console.log(i, filterStudentMatches[i], project.id, true);
           return true;
         }
       }
+      return false;
     };
 
     const filteredChosenProjects = projects.filter(checkMatches);
