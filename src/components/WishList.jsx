@@ -15,29 +15,24 @@ import {
 import { ViewIcon } from '@chakra-ui/icons';
 
 function WishList({ matches, userType, projects }) {
-  const [chosenProjects, setChosenProjects] = useState([]);
+  // const [chosenProjects, setChosenProjects] = useState([]);
 
   const getChosenProjects = () => {
-    console.log(matches);
     const filterStudentMatches = matches
       .filter(match => match.studentId === +userType)
       .map(match => match.projectId);
 
-    console.log('filterStudentMatches.projectId', filterStudentMatches);
-
     const checkMatches = project => {
       for (let i = 0; i < filterStudentMatches.length; i++) {
         if (filterStudentMatches[i] === project.id) {
+          console.log(i, filterStudentMatches[i], project.id, true);
           return true;
-        } else {
-          return false;
         }
       }
     };
 
     const filteredChosenProjects = projects.filter(checkMatches);
 
-    console.log('filteredChosenProjects', filteredChosenProjects);
     if (
       (filteredChosenProjects && filteredChosenProjects.length === 0) ||
       !filteredChosenProjects
@@ -73,46 +68,6 @@ function WishList({ matches, userType, projects }) {
       });
     }
   };
-
-  // useEffect(() => {
-  //   getChosenProjects();
-  //   console.log('chosen projects', chosenProjects);
-  // }, []);
-
-  // const showChoices = () => {
-  //   console.log(chosenProjects);
-  //   if ((chosenProjects && chosenProjects.length === 0) || !chosenProjects) {
-  //     return <p>You have not chosen any projects yet!</p>;
-  //   } else if (chosenProjects && chosenProjects.length > 0) {
-  //     return chosenProjects.map(project => {
-  //       return (
-  //         <>
-  //           <div key={`wish-${project.id}`} className="ProjectCard">
-  //             <Card>
-  //               <CardBody>
-  //                 <Flex>
-  //                   <Stack spacing="7">
-  //                     <Heading size="md">{project.challengeName}</Heading>
-  //                     <Text fontSize="md">{project.challengeDescription}</Text>
-  //                   </Stack>
-  //                   <Spacer />
-  //                   <Stack>
-  //                     <Link to={`${project.id}`}>
-  //                       <Button>
-  //                         <ViewIcon mr={2} />
-  //                         View more
-  //                       </Button>
-  //                     </Link>
-  //                   </Stack>
-  //                 </Flex>
-  //               </CardBody>
-  //             </Card>
-  //           </div>
-  //         </>
-  //       );
-  //     });
-  //   }
-  // };
 
   return (
     <div className="WishList">
