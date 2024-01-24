@@ -14,11 +14,19 @@ import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [matches, setMatches] = useState([]);
-  const [changeInterest, setChangeInterest] = useState(false);
-  const [match, setMatch] = useState(null);
-  const [foundMatchId, setFoundMatchId] = useState(null);
+  // we need the matches here because they are used in the wishlist too
 
-  const getMatch = async () => {
+  // QUESTION: do we need the changeInterest?
+  // either way, we're still passing it until the Interest Button
+  // const [changeInterest, setChangeInterest] = useState([]);
+
+  // States we don't need anymore:
+  // const [match, setMatch] = useState(null);
+  // const [foundMatchId, setFoundMatchId] = useState(null);
+
+  // ALL OF THESE FUNCTIONS ARE NOT USED ANYMORE
+
+  /* const getMatches = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/projectsStudents`
@@ -28,9 +36,13 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
-  const defineMatch = (project, user) => {
+  /*  useEffect(() => {
+    getMatches();
+  }, [match]); */
+
+  /* const defineMatch = (project, user) => {
     const foundMatch = matches.find(match => {
       return match.projectId === +project && match.studentId === +user;
     });
@@ -40,13 +52,9 @@ function App() {
     } else {
       setMatch(false);
     }
-  };
+  }; */
 
-  useEffect(() => {
-    getMatch();
-  }, [match]);
-
-  const handleInterest = async (project, user) => {
+  /* const handleInterest = async (project, user) => {
     if (!match && match !== null) {
       try {
         const requestBody = {
@@ -74,45 +82,23 @@ function App() {
         console.log(error);
       }
     }
-  };
+  }; */
 
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route
-          path="/:userType/projects"
-          element={
-            <User
-              changeInterest={changeInterest}
-              setChangeInterest={setChangeInterest}
-              match={match}
-              defineMatch={defineMatch}
-              handleInterest={handleInterest}
-              matches={matches}
-              setMatches={setMatches}
-              foundMatchId={foundMatchId}
-              setFoundMatchId={setFoundMatchId}
-            />
-          }
+          path='/:userType/projects'
+          element={<User matches={matches} setMatches={setMatches} />}
         />
         <Route
-          path="/:userType/projects/:projectId"
-          element={
-            <ProjectDetails
-              changeInterest={changeInterest}
-              setChangeInterest={setChangeInterest}
-              match={match}
-              setMatch={setMatch}
-              defineMatch={defineMatch}
-              handleInterest={handleInterest}
-              matches={matches}
-            />
-          }
+          path='/:userType/projects/:projectId'
+          element={<ProjectDetails matches={matches} setMatches={setMatches} />}
         />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path='/how-it-works' element={<HowItWorks />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 
 import AddProject from './AddProject';
@@ -22,31 +22,9 @@ function ProjectsList({
   setSubmitted,
   submitted,
   projects,
-  changeInterest,
-  setChangeInterest,
-  match,
-  handleInterest,
   matches,
-  setFoundMatchId,
-  setMatch,
-  defineMatch,
-  foundMatchId,
+  setMatches,
 }) {
-  // const [projectId, setProjectId] = useState(0);
-
-  // useEffect(() => {
-  //   handleInterest(projectId, userType);
-  // }, [changeInterest]);
-
-  // const projectListInterest = id => {
-  //   setProjectId(id);
-  //   setChangeInterest(!changeInterest);
-  // };
-
-  // useEffect(() => {
-  //   defineMatch(projectId, userType);
-  // }, [matches, match]);
-
   const showProjects = user => {
     const filteredProjects = projects.filter(
       project => project.companyId === +user
@@ -56,58 +34,51 @@ function ProjectsList({
       return <p>No projects yet!</p>;
     } else if (+user > 500) {
       return (
-        <>
-          <Heading as="h2" size="md" my={17}>
+        <div key={user.id}>
+          <Heading as='h2' size='md' my={17}>
             All Projects
           </Heading>
           {projects.map(project => {
             return (
-              <>
-                <div key={project.id} className="ProjectCard">
-                  <Card>
-                    <CardBody>
-                      <Flex>
-                        <Stack spacing="7">
-                          <Heading size="md">{project.challengeName}</Heading>
-                          <Text fontSize="md">
-                            {project.challengeDescription}
-                          </Text>
-                        </Stack>
-                        <Spacer />
-                        <Stack>
-                          <Link to={`${project.id}`}>
-                            <Button>
-                              <ViewIcon mr={2} />
-                              View more
-                            </Button>
-                          </Link>
-                          {/* <InterestButton
-                            setChangeInterest={setChangeInterest}
-                            changeInterest={changeInterest}
-                            userType={userType}
-                            projectId={project.id}
-                            match={match}
-                            defineMatch={defineMatch}
-                            handleInterest={handleInterest}
-                            matches={matches}
-                            foundMatchId={foundMatchId}
-                          /> */}
-                        </Stack>
-                      </Flex>
-                    </CardBody>
-                  </Card>
-                </div>
-              </>
+              <div key={project.id} className='ProjectCard'>
+                <Card>
+                  <CardBody>
+                    <Flex>
+                      <Stack spacing='7'>
+                        <Heading size='md'>{project.challengeName}</Heading>
+                        <Text fontSize='md'>
+                          {project.challengeDescription}
+                        </Text>
+                      </Stack>
+                      <Spacer />
+                      <Stack>
+                        <Link to={`${project.id}`}>
+                          <Button>
+                            <ViewIcon mr={2} />
+                            View more
+                          </Button>
+                        </Link>
+                        <InterestButton
+                          userType={+userType}
+                          projectId={+project.id}
+                          matches={matches}
+                          setMatches={setMatches}
+                        />
+                      </Stack>
+                    </Flex>
+                  </CardBody>
+                </Card>
+              </div>
             );
           })}
-        </>
+        </div>
       );
     } else if (+user < 100) {
       /* if company */
       return (
         <>
-          <Flex justifyContent="space-between" mb={12}>
-            <Heading as="h2" size="md" my={17}>
+          <Flex justifyContent='space-between' mb={12}>
+            <Heading as='h2' size='md' my={17}>
               Your Projects
             </Heading>
             <AddProject submitted={submitted} setSubmitted={setSubmitted} />
@@ -116,12 +87,12 @@ function ProjectsList({
           {projects.length === 0 && <Text>Loading projects</Text>}
           {filteredProjects.map(project => {
             return (
-              <div key={project.id} className="ProjectCard">
+              <div key={project.id} className='ProjectCard'>
                 <Card>
                   <CardBody>
-                    <Stack spacing="7">
-                      <Heading size="md">{project.challengeName}</Heading>
-                      <Text fontSize="md">{project.challengeDescription}</Text>
+                    <Stack spacing='7'>
+                      <Heading size='md'>{project.challengeName}</Heading>
+                      <Text fontSize='md'>{project.challengeDescription}</Text>
                       <Link to={`${project.id}`}>
                         <Button>
                           <ViewIcon mr={2} /> View more
@@ -141,7 +112,7 @@ function ProjectsList({
   };
 
   return (
-    <div className="ProjectsList">{projects && showProjects(userType)}</div>
+    <div className='ProjectsList'>{projects && showProjects(userType)}</div>
   );
 }
 

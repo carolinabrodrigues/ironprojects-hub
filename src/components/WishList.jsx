@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+
 import { Link } from 'react-router-dom';
 
 import {
@@ -41,37 +42,35 @@ function WishList({ matches, userType, projects }) {
     } else if (filteredChosenProjects && filteredChosenProjects.length > 0) {
       return filteredChosenProjects.map(project => {
         return (
-          <>
-            <div key={`wish-${project.id}`} className="ProjectCard">
-              <Card>
-                <CardBody>
-                  <Flex>
-                    <Stack spacing="7">
-                      <Heading size="md">{project.challengeName}</Heading>
-                      <Text fontSize="md">{project.challengeDescription}</Text>
-                    </Stack>
-                    <Spacer />
-                    <Stack>
-                      <Link to={`${project.id}`}>
-                        <Button>
-                          <ViewIcon mr={2} />
-                          View more
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Flex>
-                </CardBody>
-              </Card>
-            </div>
-          </>
+          <div key={`wish-${project.id}`} className='ProjectCard'>
+            <Card>
+              <CardBody>
+                <Flex>
+                  <Stack spacing='7'>
+                    <Heading size='md'>{project.challengeName}</Heading>
+                    <Text fontSize='md'>{project.challengeDescription}</Text>
+                  </Stack>
+                  <Spacer />
+                  <Stack>
+                    <Link to={`${project.id}`}>
+                      <Button>
+                        <ViewIcon mr={2} />
+                        View more
+                      </Button>
+                    </Link>
+                  </Stack>
+                </Flex>
+              </CardBody>
+            </Card>
+          </div>
         );
       });
     }
   };
 
   return (
-    <div className="WishList">
-      <Heading as="h2" size="md" my={17}>
+    <div className='WishList'>
+      <Heading as='h2' size='md' my={17}>
         My choices
       </Heading>
       {projects && getChosenProjects()}
