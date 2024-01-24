@@ -36,7 +36,6 @@ function ProjectDetails({ matches, setMatches }) {
     }
   };
 
-  // QUESTION: can we change the setMatch to another variable? match is not used
   useEffect(() => {
     getSingleProject();
 

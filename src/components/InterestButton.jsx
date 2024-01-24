@@ -8,14 +8,12 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
   const [changeInterest, setChangeInterest] = useState(false);
   const [changeMatch, setChangeMatch] = useState(null);
 
-  // QUESTION: should we create foundMatch and newMatch as states?
-
   const checkMatches = (project, user, matchesArray) => {
     const match = matchesArray.find(match => {
       return match.projectId === +project && match.studentId === +user;
     });
 
-    console.log('match inside check:', match);
+    // console.log('match inside check:', match);
 
     if (match) {
       setFoundMatch(match);
@@ -26,29 +24,10 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
     }
   };
 
-  /* let matchesUpdated = [];
-  let newMatch = {}; */
-
-  console.log('changeMatch alone:', changeMatch);
+  // console.log('changeMatch alone:', changeMatch);
 
   const handleInterestButton = async () => {
-    // const isMatch = checkMatches(projectId, userType);
-    // if match exists, when we click the button it deletes from the array
-    /*  if (isMatch) {
-      // getting an array with all elements except the match
-      matchesUpdated = matches.filter(match => match.id !== foundMatch.id);
-      console.log('matchesUpdated:', matchesUpdated);
-    } else {
-      // creating a copy of the array with the new match
-      newMatch = { projectId: projectId, studentId: userType };
-      matchesUpdated = [...matches, newMatch];
-      console.log('matchesUpdated:', matchesUpdated);
-    } */
-
-    // by the end, updates the matches state
-    // setMatches(matchesUpdated);
-
-    console.log('before async:', changeMatch);
+    // console.log('before async:', changeMatch);
     if (!changeMatch && changeMatch !== null) {
       try {
         const requestBody = { projectId: projectId, studentId: userType };
@@ -76,8 +55,7 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
     }
   };
 
-  console.log('foundMatch fora', foundMatch);
-  // USE EFFECTS & API CALLS
+  // console.log('foundMatch fora', foundMatch);
 
   const getMatches = async () => {
     try {
@@ -97,60 +75,18 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
 
   useEffect(() => {
     getMatches();
-  }, [changeMatch]);
+    return () => {
+      setFoundMatch(null);
+    };
+  }, [changeMatch, userType]);
 
   useEffect(() => {
     handleInterestButton();
   }, [changeInterest]);
 
-  /* const updateMatches = async () => {
-    if (newMatch) {
-      try {
-        const requestBody = newMatch;
-
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/projectsStudents`,
-          requestBody
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (foundMatch.id) {
-      try {
-        await axios.delete(
-          `${import.meta.env.VITE_API_URL}/projectsStudents/${foundMatch.id}`
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }; */
-
-  /*   useEffect(() => {
-    updateMatches();
-  }, [newMatch, matches]); */
-  /* useEffect(() => {
-    getMatches();
-  }, [updateMatches]); */
-
-  /* useEffect(() => {
-    defineMatch(projectId, userType);
-    // console.log(match);
-    if (match) {
-      setSingleMatch(true);
-    } else {
-      setSingleMatch(false);
-    }
-  }, [matches, match]);
-
-  useEffect(() => {
-    handleInterest(projectId, userType);
-    setSingleMatch(!singleMatch);
-  }, [changeInterest]); */
-
   return (
     <Button onClick={() => setChangeInterest(!changeInterest)}>
-      {foundMatch ? 'Remove Interest' : 'Show Interest'}
+      {foundMatch && foundMatch !== null ? 'Remove Interest' : 'Show Interest'}
     </Button>
   );
 }
