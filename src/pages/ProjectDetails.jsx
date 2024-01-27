@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import EditProjectDetails from '../components/EditProjectDetails';
 import DeleteProject from '../components/DeleteProject';
 import InterestButton from '../components/InterestButton';
+import Footer from '../components/Footer';
 
 import {
   Box,
@@ -48,8 +49,8 @@ function ProjectDetails({ matches, setMatches }) {
     if (user > 500) {
       return (
         <>
-          <Flex justifyContent='space-between' mb={12}>
-            <Heading as='h1' size='xl'>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
@@ -66,8 +67,8 @@ function ProjectDetails({ matches, setMatches }) {
     } else if (user < 100) {
       return (
         <>
-          <Flex justifyContent='space-between' mb={12}>
-            <Heading as='h1' size='xl'>
+          <Flex justifyContent="space-between" mb={12}>
+            <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
             <HStack spacing={6}>
@@ -86,18 +87,18 @@ function ProjectDetails({ matches, setMatches }) {
 
   // displaying page
   return (
-    <div className='ProjectDetails'>
-      <Box p='120px 80px 32px'>
+    <div className="ProjectDetails">
+      <Box p="120px 80px 32px">
         {project && displayHeader(+userType)}
         {project && (
-          <Grid templateColumns='repeat(6, 1fr)' gap={4}>
+          <Grid templateColumns="repeat(6, 1fr)" gap={8}>
             <GridItem colSpan={4}>
-              <VStack align='left'>
-                <Heading as='h2' size='md'>
+              <VStack align="left">
+                <Heading as="h2" size="md">
                   About the challenge:
                 </Heading>
                 <p>{project.challengeDescription}</p>
-                <AspectRatio maxW='560px' ratio={1}>
+                <AspectRatio mt={8}>
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
@@ -109,9 +110,9 @@ function ProjectDetails({ matches, setMatches }) {
             <GridItem colSpan={2}>
               {project.stakeholders.map(stakeholder => {
                 return (
-                  <div key={project.id} className='stakeholder-info'>
-                    <VStack align='left'>
-                      <Heading as='h2' size='md'>
+                  <div key={project.id} className="stakeholder-info">
+                    <VStack align="left">
+                      <Heading as="h2" size="md">
                         Stakeholder information:
                       </Heading>
                       <p>
@@ -128,6 +129,7 @@ function ProjectDetails({ matches, setMatches }) {
           </Grid>
         )}
       </Box>
+      <Footer userType={userType} />
     </div>
   );
 }

@@ -10,7 +10,6 @@ import {
   Button,
   Text,
   Flex,
-  Spacer,
 } from '@chakra-ui/react';
 
 import { ViewIcon } from '@chakra-ui/icons';
@@ -38,40 +37,49 @@ function WishList({ matches, userType, projects }) {
       (filteredChosenProjects && filteredChosenProjects.length === 0) ||
       !filteredChosenProjects
     ) {
-      return <p>You have not chosen any projects yet!</p>;
+      return (
+        <Text>
+          You have not chosen any projects yet! Click "Show Interest" to add
+          projects to your list.
+        </Text>
+      );
     } else if (filteredChosenProjects && filteredChosenProjects.length > 0) {
       return filteredChosenProjects.map(project => {
         return (
-          <div key={`wish-${project.id}`} className='ProjectCard'>
-            <Card>
-              <CardBody>
-                <Flex>
-                  <Stack spacing='7'>
-                    <Heading size='md'>{project.challengeName}</Heading>
-                    <Text fontSize='md'>{project.challengeDescription}</Text>
-                  </Stack>
-                  <Spacer />
-                  <Stack>
-                    <Link to={`${project.id}`}>
-                      <Button>
-                        <ViewIcon mr={2} />
-                        View more
-                      </Button>
-                    </Link>
-                  </Stack>
-                </Flex>
-              </CardBody>
-            </Card>
-          </div>
+          <Card
+            key={`wish-${project.id}`}
+            className="ProjectCard"
+            my={4}
+            variant="filled"
+          >
+            <CardBody>
+              <Flex justifyContent="space-between" gap={4} alignItems="center">
+                <Stack spacing={6}>
+                  <Heading size="md">{project.challengeName}</Heading>
+                  <Text fontSize="md" noOfLines={[1, 2]}>
+                    {project.challengeDescription}
+                  </Text>
+                </Stack>
+                <Stack>
+                  <Link to={`${project.id}`}>
+                    <Button size="md" variant="link" className="LinkButton">
+                      <ViewIcon mr={2} />
+                      View more
+                    </Button>
+                  </Link>
+                </Stack>
+              </Flex>
+            </CardBody>
+          </Card>
         );
       });
     }
   };
 
   return (
-    <div className='WishList'>
-      <Heading as='h2' size='md' my={17}>
-        My choices
+    <div className="WishList">
+      <Heading as="h2" size="md" py={17}>
+        Your choices
       </Heading>
       {projects && getChosenProjects()}
     </div>

@@ -80,7 +80,12 @@ function InterestButton({ projectId, userType, setMatches }) {
   }, [changeInterest]);
 
   return (
-    <Button onClick={() => setChangeInterest(!changeInterest)}>
+    <Button
+      onClick={() => setChangeInterest(!changeInterest)}
+      className="SolidButton"
+      variant="solid"
+      size="md"
+    >
       {foundMatch && foundMatch !== null ? 'Remove Interest' : 'Show Interest'}
     </Button>
   );

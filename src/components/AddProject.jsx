@@ -18,6 +18,7 @@ import {
   Textarea,
   Button,
   useDisclosure,
+  HStack,
 } from '@chakra-ui/react';
 
 function AddProject({ setSubmitted, submitted }) {
@@ -79,100 +80,130 @@ function AddProject({ setSubmitted, submitted }) {
   return (
     /* Drawer */
     <>
-      <div className='AddProject'>
-        <Button onClick={addingProject}>Add New Project</Button>
-        <Drawer placement='right' onClose={onClose} isOpen={isOpen}>
+      <div className="AddProject">
+        <Button
+          variant="solid"
+          size="lg"
+          onClick={addingProject}
+          className="SolidButton"
+        >
+          Add New Project
+        </Button>
+        <Drawer placement="right" onClose={onClose} isOpen={isOpen} size="lg">
           <DrawerOverlay />
           <DrawerContent>
-            <DrawerHeader borderBottomWidth='1px'>Add Project</DrawerHeader>
+            <DrawerHeader borderBottomWidth="1px">Add Project</DrawerHeader>
             <DrawerBody>
-              <form method='post' onSubmit={handleSubmit} id='my-form'>
-                <Stack spacing='24px'>
+              <form method="post" onSubmit={handleSubmit} id="my-form">
+                <Stack spacing="24px">
                   <Box>
-                    <FormLabel htmlFor='name'>Stakeholder Name:</FormLabel>
+                    <FormLabel htmlFor="name">Stakeholder Name:</FormLabel>
                     <Input
                       ref={firstField}
-                      id='name'
-                      placeholder='Please enter user name'
-                      type='text'
-                      name='name'
+                      id="name"
+                      placeholder="Carolina Martins"
+                      type="text"
+                      name="name"
                       onChange={e => setName(e.target.value)}
                       value={name}
                       required
+                      size="lg"
+                      focusBorderColor="#3800EB"
                     />
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor='email'>Stakeholder Email:</FormLabel>
+                    <FormLabel htmlFor="email">Stakeholder Email:</FormLabel>
                     <Input
-                      type='email'
-                      name='email'
-                      id='email'
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="carolina@martins.com"
                       onChange={e => setEmail(e.target.value)}
                       value={email}
                       required
+                      size="lg"
+                      focusBorderColor="#3800EB"
                     />
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor='challengeName'>
+                    <FormLabel htmlFor="challengeName">
                       Challenge Name:
                     </FormLabel>
                     <Input
-                      type='text'
-                      name='challengeName'
-                      id='challengeName'
+                      type="text"
+                      name="challengeName"
+                      id="challengeName"
+                      placeholder="IronProjects Hub"
                       onChange={e => setChallengeName(e.target.value)}
                       value={challengeName}
                       required
+                      size="lg"
+                      focusBorderColor="#3800EB"
                     />
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor='challengeDescription'>
+                    <FormLabel htmlFor="challengeDescription">
                       Challenge Description:
                     </FormLabel>
                     <Textarea
-                      name='challengeDescription'
-                      id='challengeDescription'
-                      cols='30'
-                      rows='10'
+                      name="challengeDescription"
+                      id="challengeDescription"
+                      cols="30"
+                      rows="10"
                       onChange={e => setChallengeDescription(e.target.value)}
                       value={challengeDescription}
                       required
+                      size="lg"
+                      placeholder="Connecting students with companies"
+                      focusBorderColor="#3800EB"
                     />
                   </Box>
 
                   <Box>
-                    <FormLabel htmlFor='videoSubmission'>
+                    <FormLabel htmlFor="videoSubmission">
                       Pitch Video URL
                     </FormLabel>
                     <InputGroup>
                       <Input
-                        type='url'
-                        name='videoSubmission'
-                        id='videoSubmission'
+                        type="url"
+                        name="videoSubmission"
+                        id="videoSubmission"
                         onChange={e => setVideoSubmission(e.target.value)}
                         value={videoSubmission}
                         required
+                        placeholder="http://www.google.com"
+                        size="lg"
+                        focusBorderColor="#3800EB"
                       />
                     </InputGroup>
                   </Box>
                 </Stack>
               </form>
             </DrawerBody>
-            <DrawerFooter borderTopWidth='1px'>
-              <Button variant='outline' mr={3} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button
-                colorScheme='blue'
-                type='submit'
-                form='my-form'
-                onClick={onClose}
-              >
-                Add
-              </Button>
+            <DrawerFooter borderTopWidth="1px">
+              <HStack spacing={4}>
+                <Button
+                  variant="link"
+                  size="lg"
+                  className="LinkButton"
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="solid"
+                  className="SolidButton"
+                  size="lg"
+                  type="submit"
+                  form="my-form"
+                  onClick={onClose}
+                >
+                  Add Project
+                </Button>
+              </HStack>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

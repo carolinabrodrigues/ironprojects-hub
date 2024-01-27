@@ -1,4 +1,4 @@
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useParams } from 'react-router-dom';
 import {
   Box,
   Link as ChakraLink,
@@ -11,46 +11,49 @@ import { useEffect, useState } from 'react';
 import ironhackLogoLight from '../assets/logo/ironhack/light.svg';
 import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 
-function Navbar({location}) {
-const [theme, setTheme] = useState(null)
+function Navbar({ location }) {
+  const [theme, setTheme] = useState(null);
+  const { projectId } = useParams();
 
-useEffect(() => {
-    defineTheme(location)
+  useEffect(() => {
+    defineTheme();
   }, [location]);
 
-  const defineTheme = (location) => {
-    if (location.pathname !== "/") {
-      console.log("location path", location.pathname)
-      setTheme("dark")
+  const defineTheme = () => {
+    if (location.pathname.includes('projects/')) {
+      setTheme('dark');
     } else {
-      setTheme("light")
+      setTheme('light');
     }
-  }
+  };
 
   return (
     <Box
-      as='nav'
-      display='flex'
-      justifyContent='space-between'
-      p='32px 80px'
-      pos='absolute'
-      w='100vw'
-      zIndex='1'
+      as="nav"
+      display="flex"
+      justifyContent="space-between"
+      p="32px 80px"
+      pos="absolute"
+      w="100vw"
+      zIndex="1"
       className={`NavBar ${theme}`}
     >
-      <HStack spacing='48px'>
-        <ChakraLink as={ReactRouterLink} to='/'>
-        {theme === "dark" ? <Image src={ironhackLogoDark} h='32px' /> : <Image src={ironhackLogoLight} h='32px' />}
-          
+      <HStack spacing="48px">
+        <ChakraLink as={ReactRouterLink} to="/">
+          {theme === 'dark' ? (
+            <Image src={ironhackLogoDark} h="32px" />
+          ) : (
+            <Image src={ironhackLogoLight} h="32px" />
+          )}
         </ChakraLink>
         {/* <Link to='/'>
         <button>How it works</button>
       </Link> */}
-        <ChakraLink as={ReactRouterLink} to='/how-it-works'>
+        <ChakraLink as={ReactRouterLink} to="/how-it-works">
           How it Works
         </ChakraLink>
       </HStack>
-      <HStack spacing='24px'>
+      <HStack spacing="24px">
         {/* <ChakraLink as={ReactRouterLink} to="">
           <Button variant="link" size="lg" borderRadius="32px">
             Register
@@ -61,8 +64,13 @@ useEffect(() => {
             Log In
           </Button>
         </ChakraLink> */}
-        <ChakraLink as={ReactRouterLink} to='/2/projects'>
-          <Button variant='outline' size='lg' borderRadius='32px' className='OutlineButton'>
+        <ChakraLink as={ReactRouterLink} to="/2/projects">
+          <Button
+            variant="outline"
+            size="lg"
+            borderRadius="32px"
+            className="OutlineButton"
+          >
             Company
           </Button>
         </ChakraLink>
@@ -71,12 +79,16 @@ useEffect(() => {
             Student
           </Button>
         </ChakraLink> */}
-        <ChakraLink as={ReactRouterLink} to='/501/projects'>
-          <Button variant='outline' size='lg' borderRadius='32px' className='OutlineButton'>
+        <ChakraLink as={ReactRouterLink} to="/501/projects">
+          <Button
+            variant="outline"
+            size="lg"
+            borderRadius="32px"
+            className="OutlineButton"
+          >
             Student
           </Button>
         </ChakraLink>
-        
       </HStack>
     </Box>
   );

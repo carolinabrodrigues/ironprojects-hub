@@ -34,8 +34,8 @@ function DeleteProject({ userType, projectId, project }) {
   };
 
   return (
-    <div className='DeleteProject'>
-      <Button colorScheme='red' onClick={onOpen} variant='link'>
+    <div className="DeleteProject">
+      <Button colorScheme="red" onClick={onOpen} variant="link" size="lg">
         <DeleteIcon mx={2} /> Delete
       </Button>
 
@@ -46,7 +46,7 @@ function DeleteProject({ userType, projectId, project }) {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete Project
             </AlertDialogHeader>
 
@@ -56,10 +56,22 @@ function DeleteProject({ userType, projectId, project }) {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button
+                ref={cancelRef}
+                onClick={onClose}
+                size="md"
+                variant="link"
+                className="LinkButton"
+              >
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={deleteProject} ml={3}>
+              <Button
+                colorScheme="red"
+                onClick={deleteProject}
+                ml={4}
+                borderRadius="32px"
+                size="md"
+              >
                 Delete {project.challengeName}
               </Button>
             </AlertDialogFooter>

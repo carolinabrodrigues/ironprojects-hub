@@ -7,6 +7,7 @@ import {
   HStack,
   VStack,
   Text,
+  Flex,
 } from '@chakra-ui/react';
 
 import { ChevronRightIcon } from '@chakra-ui/icons';
@@ -14,8 +15,8 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import ironhackLogoLight from '../assets/logo/ironhack/light.svg';
 // import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 
-function Footer() {
-  return (
+function Footer({ userType }) {
+  return userType ? (
     <Box
       as="footer"
       display="flex"
@@ -23,7 +24,42 @@ function Footer() {
       p="32px 80px"
       w="100vw"
       mt={12}
-      className='Footer'
+      className="Footer"
+    >
+      <Flex w="100%" alignItems="center" justifyContent="space-between" my={8}>
+        <ChakraLink as={ReactRouterLink} to="/">
+          <Image src={ironhackLogoLight} h="32px" />
+        </ChakraLink>
+        <HStack alignItems="center" gap={8}>
+          <ChakraLink as={ReactRouterLink} to="/how-it-works">
+            How it Works
+          </ChakraLink>
+          <ChakraLink as={ReactRouterLink} to="">
+            Contact Us
+          </ChakraLink>
+        </HStack>
+      </Flex>
+
+      <Text align="center" mt={8}>
+        © 2024{' '}
+        <ChakraLink href="https://github.com/carolinabrods">
+          Carolina Rodrigues
+        </ChakraLink>{' '}
+        &&{' '}
+        <ChakraLink href="https://github.com/ritadomar">
+          Rita Martins
+        </ChakraLink>
+      </Text>
+    </Box>
+  ) : (
+    <Box
+      as="footer"
+      display="flex"
+      flexDir="column"
+      p="32px 80px"
+      w="100vw"
+      mt={12}
+      className="Footer"
     >
       <ChakraLink as={ReactRouterLink} to="/">
         <Image src={ironhackLogoLight} h="32px" />
@@ -67,12 +103,22 @@ function Footer() {
               </ChakraLink>
             </HStack> */}
           <ChakraLink as={ReactRouterLink} to="/2/projects">
-            <Button variant="solid" size="lg" borderRadius="32px" className='OutlineButton'>
+            <Button
+              variant="solid"
+              size="lg"
+              borderRadius="32px"
+              className="OutlineButton"
+            >
               Company
             </Button>
           </ChakraLink>
           <ChakraLink as={ReactRouterLink} to="/501/projects">
-            <Button variant="solid" size="lg" borderRadius="32px" className='OutlineButton'>
+            <Button
+              variant="solid"
+              size="lg"
+              borderRadius="32px"
+              className="OutlineButton"
+            >
               Student
             </Button>
           </ChakraLink>

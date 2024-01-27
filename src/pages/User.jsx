@@ -5,6 +5,7 @@ import WishList from '../components/WishList';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 import {
   Heading,
@@ -70,10 +71,11 @@ function User({ matches, setMatches }) {
   }, [submitted]);
 
   return (
-    <div className='UserPage'>
-      <Box pt='120px' mx={10}>
+    <div className="UserPage">
+      {/* header */}
+      <Box pt="120px" pb="60px" px={10} className="UserHeader" as="header">
         {user && (
-          <Heading as='h1' my={17}>
+          <Heading as="h1" my={17}>
             Welcome, {user.name}
           </Heading>
         )}
@@ -81,52 +83,52 @@ function User({ matches, setMatches }) {
         {/* if company */}
         {user && +userType < 100 && (
           <>
-            <Container maxW='container.3xl' my={17} align='left' p='0'>
-              <Card align='left'>
-                <CardHeader>
-                  <Heading as='h2' size='md'>
+            <Container maxW="container.3xl" my={17} align="left" p="0">
+              <Card variant="filled" align="left" className="CompanyCard">
+                <CardHeader pb={4}>
+                  <Heading as="h2" size="md">
                     Company Profile
                   </Heading>
                 </CardHeader>
 
                 <CardBody>
                   <Flex>
-                    <Box w='250px'>
+                    <Box w="250px">
                       <Stack spacing={6}>
                         <Box>
-                          <Heading as='h3' size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="sm" textTransform="uppercase">
                             User
                           </Heading>
-                          <Text pt='2' fontSize='sm'>
+                          <Text pt="2" fontSize="md">
                             {user.userName}
                           </Text>
                         </Box>
 
                         <Box>
-                          <Heading as='h3' size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="sm" textTransform="uppercase">
                             Email
                           </Heading>
-                          <Text pt='2' fontSize='sm'>
+                          <Text pt="2" fontSize="md">
                             {user.userEmail}
                           </Text>
                         </Box>
                       </Stack>
                     </Box>
-                    <Box w='250px'>
+                    <Box w="250px">
                       <Stack spacing={6}>
                         <Box>
-                          <Heading as='h3' size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="sm" textTransform="uppercase">
                             Company Name
                           </Heading>
-                          <Text pt='2' fontSize='sm'>
+                          <Text pt="2" fontSize="md">
                             {user.name}
                           </Text>
                         </Box>
 
                         <Box>
-                          <Heading as='h3' size='xs' textTransform='uppercase'>
+                          <Heading as="h3" size="sm" textTransform="uppercase">
                             <Link href={user.website} isExternal>
-                              Website <ExternalLinkIcon mx='2px' />
+                              Website <ExternalLinkIcon mx="2px" />
                             </Link>
                           </Heading>
                         </Box>
@@ -136,40 +138,47 @@ function User({ matches, setMatches }) {
                 </CardBody>
               </Card>
             </Container>
-
-            <ProjectsList
-              userType={userType}
-              submitted={submitted}
-              setSubmitted={setSubmitted}
-              setMatches={setMatches}
-              projects={projects}
-            />
           </>
         )}
 
         {/* if student */}
         {user && +userType > 500 && (
-          <>
-            <Box>
-              <WishList
-                userType={userType}
-                submitted={submitted}
-                setSubmitted={setSubmitted}
-                matches={matches}
-                setMatches={setMatches}
-                projects={projects}
-              />
-              <ProjectsList
-                userType={userType}
-                submitted={submitted}
-                setSubmitted={setSubmitted}
-                setMatches={setMatches}
-                projects={projects}
-              />
-            </Box>
-          </>
+          <WishList
+            userType={userType}
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            matches={matches}
+            setMatches={setMatches}
+            projects={projects}
+          />
         )}
       </Box>
+
+      {/* Projects List */}
+      <Box py="60px" px={10} className="ProjectsList">
+        {/* if company */}
+        {user && +userType < 100 && (
+          <ProjectsList
+            userType={userType}
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            setMatches={setMatches}
+            projects={projects}
+          />
+        )}
+
+        {/* if student */}
+        {user && +userType > 500 && (
+          <ProjectsList
+            userType={userType}
+            submitted={submitted}
+            setSubmitted={setSubmitted}
+            setMatches={setMatches}
+            projects={projects}
+          />
+        )}
+      </Box>
+      <Footer userType={userType} />
     </div>
   );
 }

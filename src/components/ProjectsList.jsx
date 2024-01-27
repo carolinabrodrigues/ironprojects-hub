@@ -12,7 +12,7 @@ import {
   Button,
   Text,
   Flex,
-  Spacer,
+  HStack,
 } from '@chakra-ui/react';
 
 import { ViewIcon } from '@chakra-ui/icons';
@@ -30,43 +30,49 @@ function ProjectsList({
     );
     /* if student */
     if (+user > 500 && projects.length === 0) {
-      return <p>No projects yet!</p>;
+      return <Text>No projects yet!</Text>;
     } else if (+user > 500) {
       return (
         <div key={user.id}>
-          <Heading as='h2' size='md' my={17}>
+          <Heading as="h2" size="md" my={2}>
             All Projects
           </Heading>
           {projects.map(project => {
             return (
-              <div key={project.id} className='ProjectCard'>
-                <Card>
-                  <CardBody>
-                    <Flex>
-                      <Stack spacing='7'>
-                        <Heading size='md'>{project.challengeName}</Heading>
-                        <Text fontSize='md'>
-                          {project.challengeDescription}
-                        </Text>
-                      </Stack>
-                      <Spacer />
-                      <Stack>
-                        <Link to={`${project.id}`}>
-                          <Button>
-                            <ViewIcon mr={2} />
-                            View more
-                          </Button>
-                        </Link>
-                        <InterestButton
-                          userType={+userType}
-                          projectId={+project.id}
-                          setMatches={setMatches}
-                        />
-                      </Stack>
-                    </Flex>
-                  </CardBody>
-                </Card>
-              </div>
+              <Card
+                key={project.id}
+                className="ProjectCard"
+                my={4}
+                variant="filled"
+              >
+                <CardBody>
+                  <Flex
+                    justifyContent="space-between"
+                    gap={4}
+                    alignItems="center"
+                  >
+                    <Stack spacing={6}>
+                      <Heading size="md">{project.challengeName}</Heading>
+                      <Text fontSize="md" noOfLines={[1, 2]}>
+                        {project.challengeDescription}
+                      </Text>
+                    </Stack>
+                    <HStack spacing={4}>
+                      <Link to={`${project.id}`}>
+                        <Button size="md" variant="link" className="LinkButton">
+                          <ViewIcon mr={2} />
+                          View more
+                        </Button>
+                      </Link>
+                      <InterestButton
+                        userType={+userType}
+                        projectId={+project.id}
+                        setMatches={setMatches}
+                      />
+                    </HStack>
+                  </Flex>
+                </CardBody>
+              </Card>
             );
           })}
         </div>
@@ -75,8 +81,8 @@ function ProjectsList({
       /* if company */
       return (
         <>
-          <Flex justifyContent='space-between' mb={12}>
-            <Heading as='h2' size='md' my={17}>
+          <Flex justifyContent="space-between" mb={6}>
+            <Heading as="h2" size="md" my={2}>
               Your Projects
             </Heading>
             <AddProject submitted={submitted} setSubmitted={setSubmitted} />
@@ -85,21 +91,32 @@ function ProjectsList({
           {projects.length === 0 && <Text>Loading projects</Text>}
           {filteredProjects.map(project => {
             return (
-              <div key={project.id} className='ProjectCard'>
-                <Card>
-                  <CardBody>
-                    <Stack spacing='7'>
-                      <Heading size='md'>{project.challengeName}</Heading>
-                      <Text fontSize='md'>{project.challengeDescription}</Text>
-                      <Link to={`${project.id}`}>
-                        <Button>
-                          <ViewIcon mr={2} /> View more
-                        </Button>
-                      </Link>
+              <Card
+                key={project.id}
+                className="ProjectCard"
+                my={4}
+                variant="filled"
+              >
+                <CardBody>
+                  <Flex
+                    justifyContent="space-between"
+                    gap={4}
+                    alignItems="center"
+                  >
+                    <Stack spacing={6}>
+                      <Heading size="md">{project.challengeName}</Heading>
+                      <Text fontSize="md" noOfLines={[1, 2]}>
+                        {project.challengeDescription}
+                      </Text>
                     </Stack>
-                  </CardBody>
-                </Card>
-              </div>
+                    <Link to={`${project.id}`}>
+                      <Button size="md" variant="link" className="LinkButton">
+                        <ViewIcon mr={2} /> View more
+                      </Button>
+                    </Link>
+                  </Flex>
+                </CardBody>
+              </Card>
             );
           })}
         </>
@@ -110,7 +127,7 @@ function ProjectsList({
   };
 
   return (
-    <div className='ProjectsList'>{projects && showProjects(userType)}</div>
+    <div className="ProjectsList">{projects && showProjects(userType)}</div>
   );
 }
 
