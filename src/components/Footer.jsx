@@ -72,7 +72,7 @@ function Footer({ userType }) {
         </Link> */}
           <ChakraLink
             as={ReactRouterLink}
-            to=""
+            to="/how-it-works"
             display="flex"
             justifyContent="space-between"
           >

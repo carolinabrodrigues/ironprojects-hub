@@ -2,22 +2,22 @@ import { Box, Heading, Text, Flex, VStack } from '@chakra-ui/react';
 
 function HowItWorks() {
   return (
-    <div>
-      <Box pt='120px' mx={10}>
-        <Heading as='h2' my={17}>
+    <div className="HowItWorks">
+      <Box pt="120px" mx={10}>
+        <Heading as="h2" my={17}>
           How We Transform Ideas into Real-World Solutions
         </Heading>
 
-        <Box className='howWorksAll'>
-          <Box className='howWorksLine'></Box>
-          <Flex gap='180px'>
-            <Box className='stepBox'>
-              <Box className='howWorksNumbers'>
-                <Heading size='lg'>1</Heading>
+        <Box className="howWorksAll">
+          <Box className="howWorksLine"></Box>
+          <Flex gap="180px">
+            <Box className="stepBox">
+              <Box className="howWorksNumbers">
+                <Heading size="lg">1</Heading>
               </Box>
-              <VStack className='howWorksText' h='220px' spacing='30px'>
+              <VStack className="howWorksText" h="220px" spacing="30px">
                 <Box>
-                  <Heading size='md'>Get Started</Heading>
+                  <Heading size="md">Get Started</Heading>
                 </Box>
                 <Box>
                   <Text>
@@ -28,13 +28,13 @@ function HowItWorks() {
               </VStack>
             </Box>
 
-            <Box className='stepBox'>
-              <Box className='howWorksNumbers'>
-                <Heading size='lg'>2</Heading>
+            <Box className="stepBox">
+              <Box className="howWorksNumbers">
+                <Heading size="lg">2</Heading>
               </Box>
-              <VStack className='howWorksText' h='220px' spacing='30px'>
+              <VStack className="howWorksText" h="220px" spacing="30px">
                 <Box>
-                  <Heading size='md'>Submit Project</Heading>
+                  <Heading size="md">Submit Project</Heading>
                 </Box>
                 <Box>
                   <Text>
@@ -45,13 +45,13 @@ function HowItWorks() {
               </VStack>
             </Box>
 
-            <Box className='stepBox'>
-              <Box className='howWorksNumbers'>
-                <Heading size='lg'>3</Heading>
+            <Box className="stepBox">
+              <Box className="howWorksNumbers">
+                <Heading size="lg">3</Heading>
               </Box>
-              <VStack className='howWorksText' h='220px' spacing='30px'>
+              <VStack className="howWorksText" h="220px" spacing="30px">
                 <Box>
-                  <Heading size='md'>Pick Projects</Heading>
+                  <Heading size="md">Pick Projects</Heading>
                 </Box>
                 <Box>
                   <Text>
@@ -63,13 +63,13 @@ function HowItWorks() {
               </VStack>
             </Box>
 
-            <Box className='stepBox'>
-              <Box className='howWorksNumbers'>
-                <Heading size='lg'>4</Heading>
+            <Box className="stepBox">
+              <Box className="howWorksNumbers">
+                <Heading size="lg">4</Heading>
               </Box>
-              <VStack className='howWorksText' h='220px' spacing='30px'>
+              <VStack className="howWorksText" h="220px" spacing="30px">
                 <Box>
-                  <Heading size='md'>Find a Match</Heading>
+                  <Heading size="md">Find a Match</Heading>
                 </Box>
                 <Box>
                   <Text>
@@ -81,13 +81,13 @@ function HowItWorks() {
               </VStack>
             </Box>
 
-            <Box className='stepBox'>
-              <Box className='howWorksNumbers'>
-                <Heading size='lg'>5</Heading>
+            <Box className="stepBox">
+              <Box className="howWorksNumbers">
+                <Heading size="lg">5</Heading>
               </Box>
-              <VStack className='howWorksText' h='220px' spacing='30px'>
+              <VStack className="howWorksText" h="220px" spacing="30px">
                 <Box>
-                  <Heading size='md'>Start the Project</Heading>
+                  <Heading size="md">Start the Project</Heading>
                 </Box>
                 <Box>
                   <Text>

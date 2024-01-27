@@ -73,7 +73,7 @@ function User({ matches, setMatches }) {
   return (
     <div className="UserPage">
       {/* header */}
-      <Box pt="120px" pb="60px" px={10} className="UserHeader" as="header">
+      <Box pt="120px" pb="60px" px="80px" className="UserHeader" as="header">
         {user && (
           <Heading as="h1" my={17}>
             Welcome, {user.name}
@@ -155,7 +155,7 @@ function User({ matches, setMatches }) {
       </Box>
 
       {/* Projects List */}
-      <Box py="60px" px={10} className="ProjectsList">
+      <Box py="60px" px="80px" className="ProjectsList">
         {/* if company */}
         {user && +userType < 100 && (
           <ProjectsList
