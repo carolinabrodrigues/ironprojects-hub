@@ -22,6 +22,7 @@ import {
 function ProjectDetails({ matches, setMatches }) {
   const [project, setProject] = useState(null);
   const [edited, setEdited] = useState(true);
+  const [company, setCompany] = useState(null);
   // const [interested, setInterested] = useState(null);
   const { projectId, userType } = useParams();
 
@@ -30,8 +31,13 @@ function ProjectDetails({ matches, setMatches }) {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/projects/${projectId}`
       );
-
       setProject(response.data);
+
+      const companyResponse = await axios.get(
+        `${import.meta.env.VITE_API_URL}/companies/${response.data.companyId}`
+      );
+
+      setCompany(companyResponse.data);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +96,7 @@ function ProjectDetails({ matches, setMatches }) {
     <div className="ProjectDetails">
       <Box p="120px 80px 32px">
         {project && displayHeader(+userType)}
-        {project && (
+        {project && company && (
           <Grid templateColumns="repeat(6, 1fr)" gap={8}>
             <GridItem colSpan={4}>
               <VStack align="left">
@@ -108,23 +114,34 @@ function ProjectDetails({ matches, setMatches }) {
               </VStack>
             </GridItem>
             <GridItem colSpan={2}>
-              {project.stakeholders.map(stakeholder => {
-                return (
-                  <div key={project.id} className="stakeholder-info">
-                    <VStack align="left">
-                      <Heading as="h2" size="md">
-                        Stakeholder information:
-                      </Heading>
-                      <p>
-                        {stakeholder.name} -{' '}
-                        <Link href={`mailto:${stakeholder.email}`} isExternal>
-                          {stakeholder.email}
-                        </Link>
-                      </p>
-                    </VStack>
-                  </div>
-                );
-              })}
+              <VStack align="left" mb={2} spacing={6}>
+                <VStack align="left">
+                  <Heading as="h2" size="md">
+                    About the Company:
+                  </Heading>
+
+                  <Link href={company.website} isExternal>
+                    {company.name}
+                  </Link>
+                </VStack>
+                <VStack align="left">
+                  <Heading as="h3" size="sm">
+                    Stakeholder information:
+                  </Heading>
+                  <ul className="list">
+                    {project.stakeholders.map(stakeholder => {
+                      return (
+                        <li key={project.id} className="stakeholder-info">
+                          {stakeholder.name} -{' '}
+                          <Link href={`mailto:${stakeholder.email}`} isExternal>
+                            {stakeholder.email}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </VStack>
+              </VStack>
             </GridItem>
           </Grid>
         )}

@@ -95,3 +95,7 @@ body {
 .ProjectDetails {
   background-color: var(--white) !important;
 }
+
+.list {
+  padding-left: 20px;
+}
