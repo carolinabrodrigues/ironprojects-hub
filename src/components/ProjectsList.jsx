@@ -22,7 +22,6 @@ function ProjectsList({
   setSubmitted,
   submitted,
   projects,
-  matches,
   setMatches,
 }) {
   const showProjects = user => {
@@ -61,7 +60,6 @@ function ProjectsList({
                         <InterestButton
                           userType={+userType}
                           projectId={+project.id}
-                          matches={matches}
                           setMatches={setMatches}
                         />
                       </Stack>

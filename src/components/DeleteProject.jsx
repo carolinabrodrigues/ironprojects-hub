@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
