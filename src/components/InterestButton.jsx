@@ -3,7 +3,9 @@ import { Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function InterestButton({ projectId, userType, matches, setMatches }) {
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
+
+function InterestButton({ projectId, userType, setMatches }) {
   const [foundMatch, setFoundMatch] = useState(null);
   const [changeInterest, setChangeInterest] = useState(false);
   const [changeMatch, setChangeMatch] = useState(null);
@@ -12,8 +14,6 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
     const match = matchesArray.find(match => {
       return match.projectId === +project && match.studentId === +user;
     });
-
-    // console.log('match inside check:', match);
 
     if (match) {
       setFoundMatch(match);
@@ -24,10 +24,7 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
     }
   };
 
-  // console.log('changeMatch alone:', changeMatch);
-
   const handleInterestButton = async () => {
-    // console.log('before async:', changeMatch);
     if (!changeMatch && changeMatch !== null) {
       try {
         const requestBody = { projectId: projectId, studentId: userType };
@@ -54,8 +51,6 @@ function InterestButton({ projectId, userType, matches, setMatches }) {
       }
     }
   };
-
-  // console.log('foundMatch fora', foundMatch);
 
   const getMatches = async () => {
     try {

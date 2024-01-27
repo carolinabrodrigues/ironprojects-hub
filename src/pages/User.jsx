@@ -16,14 +16,13 @@ import {
   CardBody,
   Stack,
   Flex,
-  Spacer,
   Container,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 function User({ matches, setMatches }) {
   const [user, setUser] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(null);
   const [projects, setProjects] = useState([]);
 
   const { userType } = useParams();
@@ -60,6 +59,7 @@ function User({ matches, setMatches }) {
         `${import.meta.env.VITE_API_URL}/projects`
       );
       setProjects(response.data);
+      setSubmitted(false);
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +81,6 @@ function User({ matches, setMatches }) {
         {/* if company */}
         {user && +userType < 100 && (
           <>
-            {/* <Box align="left" my={17}> */}
             <Container maxW='container.3xl' my={17} align='left' p='0'>
               <Card align='left'>
                 <CardHeader>
@@ -137,13 +136,11 @@ function User({ matches, setMatches }) {
                 </CardBody>
               </Card>
             </Container>
-            {/* </Box> */}
 
             <ProjectsList
               userType={userType}
               submitted={submitted}
               setSubmitted={setSubmitted}
-              matches={matches}
               setMatches={setMatches}
               projects={projects}
             />
@@ -166,12 +163,10 @@ function User({ matches, setMatches }) {
                 userType={userType}
                 submitted={submitted}
                 setSubmitted={setSubmitted}
-                matches={matches}
                 setMatches={setMatches}
                 projects={projects}
               />
             </Box>
-            <Box></Box>
           </>
         )}
       </Box>
