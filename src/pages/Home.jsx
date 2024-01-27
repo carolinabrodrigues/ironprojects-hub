@@ -11,10 +11,9 @@ import {
   Image,
   Button,
   Link,
-  HStack,
   Grid,
   GridItem,
-  Flex
+  
 } from '@chakra-ui/react';
 
 import Footer from '../components/Footer';
@@ -66,7 +65,7 @@ function Home() {
         {/* </HStack> */}
       </Box>
 
-      <Box as="section">
+      <Box as="section" mt={16}>
         <Container maxW="container.xl">
           <Heading as="h2" size="xl" mb={4}>
             Previous Editions
@@ -76,7 +75,7 @@ function Home() {
             previous editions:
           </Text>
           <SimpleGrid columns={3} spacing="24px" mt={16}>
-            <Card variant="outline">
+            <Card variant="filled" className='StudentProjectCard'>
               <CardBody>
 
                 <VStack align="left" justify="space-between" height="100%">
@@ -107,6 +106,7 @@ function Home() {
                       variant="outline"
                       borderRadius="32px"
                       w="100%"
+                      className='OutlineButton'
                     >
                       See Project
                     </Button>
@@ -114,7 +114,7 @@ function Home() {
                 </VStack>
               </CardBody>
             </Card>
-            <Card variant="outline">
+            <Card variant="filled" className='StudentProjectCard'>
               <CardBody>
               <VStack align="left" justify="space-between" height="100%">
                 <VStack align="left" spacing="16px">
@@ -143,6 +143,7 @@ function Home() {
                       variant="outline"
                       borderRadius="32px"
                       w="100%"
+                      className='OutlineButton'
                     >
                       See Project
                     </Button>
@@ -150,7 +151,7 @@ function Home() {
                 </VStack>
               </CardBody>
             </Card>
-            <Card variant="outline">
+            <Card variant="filled" className='StudentProjectCard'>
               <CardBody>
               <VStack align="left" justify="space-between" height="100%">
                 <VStack align="left" spacing="16px">
@@ -180,6 +181,7 @@ function Home() {
                       variant="outline"
                       borderRadius="32px"
                       w="100%"
+                      className='OutlineButton'
                     >
                       See Project
                     </Button>

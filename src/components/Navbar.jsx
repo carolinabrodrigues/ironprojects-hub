@@ -57,30 +57,26 @@ useEffect(() => {
           </Button>
         </ChakraLink>
         <ChakraLink as={ReactRouterLink} to="">
-          <Button variant="solid" size="lg" borderRadius="32px">
+          <Button variant="outline" size="lg" borderRadius="32px">
             Log In
           </Button>
         </ChakraLink> */}
         <ChakraLink as={ReactRouterLink} to='/2/projects'>
-          <Button variant='solid' size='lg' borderRadius='32px'>
+          <Button variant='outline' size='lg' borderRadius='32px' className='OutlineButton'>
             Company
           </Button>
         </ChakraLink>
         {/* <ChakraLink as={ReactRouterLink} to="/501/projects">
-          <Button variant="solid" size="lg" borderRadius="32px">
+          <Button variant="outline" size="lg" borderRadius="32px">
             Student
           </Button>
         </ChakraLink> */}
         <ChakraLink as={ReactRouterLink} to='/501/projects'>
-          <Button variant='solid' size='lg' borderRadius='32px'>
-            Student 1
+          <Button variant='outline' size='lg' borderRadius='32px' className='OutlineButton'>
+            Student
           </Button>
         </ChakraLink>
-        <ChakraLink as={ReactRouterLink} to='/502/projects'>
-          <Button variant='solid' size='lg' borderRadius='32px'>
-            Student 2
-          </Button>
-        </ChakraLink>
+        
       </HStack>
     </Box>
   );

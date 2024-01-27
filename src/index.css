@@ -9,15 +9,29 @@
   --ocean-blue: #0009EA;
   --white: #FFFFFF;
   --concrete: #F2F2F2;
+  --paua: #16005E;
+  --purple: #3800EB;
 }
 
 body {
-  background-color: var(--concrete);
+  background-color: var(--concrete) !important;
 }
 
 /* .NavBar {
   background-color: var(--white);
 } */
+
+.OutlineButton {
+border: 2px solid var(--purple) !important;
+background: var(--white) !important;
+color: var(--purple) !important;
+}
+
+.OutlineButton:hover {
+  
+  background: var(--purple) !important;
+  color: var(--white) !important;
+}
 
 .dark {
   background-color: white;
@@ -31,5 +45,14 @@ body {
 
 .Hero {
   background:  linear-gradient(102deg, #344BF1 24.14%, #2DC5FA 100%);
+  color: var(--white);
+}
+
+.StudentProjectCard {
+  background-color: white !important;
+}
+
+.Footer {
+  background-color: var(--paua);
   color: var(--white);
 }
