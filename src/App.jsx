@@ -1,7 +1,9 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { extendTheme } from "@chakra-ui/react"
+
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -14,6 +16,13 @@ import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [matches, setMatches] = useState([]);
+
+  const location = useLocation()
+
+  // useEffect(() => {
+  //   getMatches();
+  // }, [location]);
+  
   // we need the matches here because they are used in the wishlist too
 
   // QUESTION: do we need the changeInterest?
@@ -84,9 +93,11 @@ function App() {
     }
   }; */
 
+
+
   return (
     <div className='App'>
-      <Navbar />
+      <Navbar location={location}/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route

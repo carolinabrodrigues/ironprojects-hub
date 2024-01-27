@@ -7,23 +7,41 @@ import {
   HStack,
 } from '@chakra-ui/react';
 
+import { useEffect, useState } from 'react';
 import ironhackLogoLight from '../assets/logo/ironhack/light.svg';
 import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 
-function Navbar() {
+function Navbar({location}) {
+const [theme, setTheme] = useState(null)
+
+useEffect(() => {
+    defineTheme(location)
+  }, [location]);
+
+  const defineTheme = (location) => {
+    if (location.pathname !== "/") {
+      console.log("location path", location.pathname)
+      setTheme("dark")
+    } else {
+      setTheme("light")
+    }
+  }
+
   return (
     <Box
       as='nav'
       display='flex'
       justifyContent='space-between'
       p='32px 80px'
-      pos='fixed'
+      pos='absolute'
       w='100vw'
       zIndex='1'
+      className={`NavBar ${theme}`}
     >
       <HStack spacing='48px'>
         <ChakraLink as={ReactRouterLink} to='/'>
-          <Image src={ironhackLogoDark} h='32px' />
+        {theme === "dark" ? <Image src={ironhackLogoDark} h='32px' /> : <Image src={ironhackLogoLight} h='32px' />}
+          
         </ChakraLink>
         {/* <Link to='/'>
         <button>How it works</button>

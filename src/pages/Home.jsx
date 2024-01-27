@@ -11,6 +11,10 @@ import {
   Image,
   Button,
   Link,
+  HStack,
+  Grid,
+  GridItem,
+  Flex
 } from '@chakra-ui/react';
 
 import Footer from '../components/Footer';
@@ -21,8 +25,7 @@ import keepinLogo from '../assets/logo/keepin.png';
 import keepinMockup from '../assets/mockup/keepin.png';
 import sentryonicsLogo from '../assets/logo/sentryonics.png';
 import sentryonicsMockup from '../assets/mockup/sentryonics.png';
-import preipoLogo from '../assets/logo/preipo.png';
-import preipoMockup from '../assets/mockup/preipo.png';
+import heroImage from "../assets/hero-image.png"
 
 function Home() {
   return (
@@ -34,26 +37,37 @@ function Home() {
         alignItems="center"
         h="90vh"
         as="section"
+        className='Hero'
       >
         <VisuallyHidden>
           <Heading as="h1">IronProjects Hub</Heading>
         </VisuallyHidden>
-        <Container maxW="container.lg">
-          <Heading as="h2" size="3xl" mb={4}>
+        {/* <HStack> */}
+        <Container maxW="container.xl">
+        <Grid templateColumns='repeat(3, 1fr)' gap={6} alignItems="center">
+            <GridItem colSpan={2}>
+          <Heading as="h2" size="3xl" mb={4} lineHeight="120%" fontWeight="semibold">
             Do you feel like you could use an extra hand in your product design?
           </Heading>
 
-          <Text fontSize="2xl">
+          <Text fontSize="xl" lineHeight="150%" fontWeight="medium">
             If your team needs extra help in solving design challenges (general
             UX/UI, websites, apps, digital user experience), our students are
             eager to get their hands on exciting and innovative products! Free
             of charge 🙌
           </Text>
+        </GridItem>
+        <GridItem colSpan={1}>
+
+        <Image src={heroImage} alt="Hero Image" />
+        </GridItem>
+        </Grid>
         </Container>
+        {/* </HStack> */}
       </Box>
 
       <Box as="section">
-        <Container maxW="container.lg">
+        <Container maxW="container.xl">
           <Heading as="h2" size="xl" mb={4}>
             Previous Editions
           </Heading>
@@ -61,10 +75,13 @@ function Home() {
             Not sure what you can get from this? Check out the results from
             previous editions:
           </Text>
-          <SimpleGrid columns={3} spacing="16px" mt={16}>
+          <SimpleGrid columns={3} spacing="24px" mt={16}>
             <Card variant="outline">
               <CardBody>
+
+                <VStack align="left" justify="space-between" height="100%">
                 <VStack align="left" spacing="16px">
+
                   <Image
                     src={granterLogo}
                     alt="Granter.ai"
@@ -73,7 +90,7 @@ function Home() {
                     align="left"
                   />
 
-                  <VStack spacing="8px" align="left">
+                  <VStack spacing="8px" align="left" >
                     <Heading as="h3" size="xl">
                       Redesign the Granter.ai website
                     </Heading>
@@ -83,6 +100,7 @@ function Home() {
                   </VStack>
 
                   <Image src={granterMockup} alt="Project mockup" />
+                </VStack>
                   <Link href="https://www.jviegasdesigns.com/work/granter-ai">
                     <Button
                       size="lg"
@@ -98,6 +116,7 @@ function Home() {
             </Card>
             <Card variant="outline">
               <CardBody>
+              <VStack align="left" justify="space-between" height="100%">
                 <VStack align="left" spacing="16px">
                   <Image
                     src={keepinLogo}
@@ -117,6 +136,7 @@ function Home() {
                   </VStack>
 
                   <Image src={keepinMockup} alt="Project mockup" />
+                  </VStack>
                   <Link href="https://www.lilianasantosdesigns.com/keepin">
                     <Button
                       size="lg"
@@ -132,6 +152,7 @@ function Home() {
             </Card>
             <Card variant="outline">
               <CardBody>
+              <VStack align="left" justify="space-between" height="100%">
                 <VStack align="left" spacing="16px">
                   <Image
                     src={sentryonicsLogo}
@@ -151,6 +172,8 @@ function Home() {
                   </VStack>
 
                   <Image src={sentryonicsMockup} alt="Project mockup" />
+                  </VStack>
+
                   <Link href="https://ivamachado.framer.website/Sentryonics">
                     <Button
                       size="lg"
