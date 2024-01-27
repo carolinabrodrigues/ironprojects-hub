@@ -40,3 +40,50 @@
 .read-the-docs {
   color: #888;
 } */
+
+.howWorksAll {
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  top: 260px;
+  display: grid;
+  place-items: center;
+}
+
+.howWorksNumbers {
+  background-color: blue;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.howWorksLine {
+  position: fixed;
+  height: 2px;
+  width: 100%;
+  top: 30px;
+  background-color: blue;
+  z-index: -1;
+}
+
+.howWorksText {
+  position: absolute;
+  margin-top: 100px;
+  width: 180px;
+  text-align: center;
+}
+
+.stepBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  height: auto;
+  width: 60px;
+  box-sizing: border-box;
+}
