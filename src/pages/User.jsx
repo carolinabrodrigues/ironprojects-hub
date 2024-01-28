@@ -17,7 +17,6 @@ import {
   CardBody,
   Flex,
   Container,
-  Spacer,
   Icon,
 } from '@chakra-ui/react';
 
@@ -133,30 +132,6 @@ function User({ matches, setMatches }) {
                         </Link>
                       </Heading>
                     </Box>
-                    {/*                    </Stack> */}
-                    {/*                   </Box> */}
-                    <Spacer />
-
-                    <Box w='230px'>
-                      {/* <Stack spacing={6}>
-                        <Box> */}
-                      <Heading as='h3' size='sm' textTransform='uppercase'>
-                        Company Name
-                      </Heading>
-                      <Text pt='2' fontSize='md'>
-                        {user.name}
-                      </Text>
-                    </Box>
-                    <Spacer />
-                    <Box w='230px'>
-                      <Heading as='h3' size='sm' textTransform='uppercase'>
-                        <Link href={user.website} isExternal>
-                          Website <ExternalLinkIcon mx='2px' />
-                        </Link>
-                      </Heading>
-                    </Box>
-                    {/* </Stack> */}
-                    {/* </Box> */}
                   </Flex>
                 </CardBody>
               </Card>
