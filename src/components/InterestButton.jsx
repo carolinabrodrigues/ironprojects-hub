@@ -78,29 +78,28 @@ function InterestButton({ projectId, userType, setMatches }) {
   }, [changeInterest]);
 
   return (
-    // <>
-    //   {foundMatch && foundMatch !== null ? (
-    //     <Button
-    //       onClick={() => setChangeInterest(!changeInterest)}
-    //       className="SolidButton"
-    //       variant="solid"
-    //       size="md"
-    //     >
-    //       Remove Interest
-    //     </Button>
-    //   ) : (
-    //     <Button
-    //       onClick={() => setChangeInterest(!changeInterest)}
-    //       className="OutlineButton"
-    //       variant="outline"
-    //       size="md"
-    //       borderRadius="32px"
-    //     >
-    //       Show Interest
-    //     </Button>
-    //   )}
-    // </>
-    <Button
+    <>
+      {foundMatch && foundMatch !== null ? (
+        <Button
+          onClick={() => setChangeInterest(!changeInterest)}
+          className="SolidButton"
+          variant="solid"
+          size="md"
+        >
+          Remove Interest
+        </Button>
+      ) : (
+        <Button
+          onClick={() => setChangeInterest(!changeInterest)}
+          className="OutlineButton"
+          variant="outline"
+          size="md"
+          borderRadius="32px"
+        >
+          Show Interest
+        </Button>
+      )}
+      {/* <Button
       onClick={() => setChangeInterest(!changeInterest)}
       className="SolidButton"
       variant="Outline"
@@ -108,7 +107,8 @@ function InterestButton({ projectId, userType, setMatches }) {
       borderRadius="32px"
     >
       {foundMatch && foundMatch !== null ? 'Remove Interest' : 'Show Interest'}
-    </Button>
+    </Button> */}
+    </>
   );
 }
 export default InterestButton;

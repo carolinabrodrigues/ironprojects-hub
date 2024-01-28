@@ -184,7 +184,6 @@ function ProjectDetails({ matches, setMatches }) {
             {project.challengeDescription
               .split(
                 `
-
 `
               )
               .map((str, index) => {
