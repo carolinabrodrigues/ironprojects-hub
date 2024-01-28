@@ -18,6 +18,7 @@ import {
   Stack,
   Flex,
   Container,
+  Spacer,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
@@ -71,11 +72,11 @@ function User({ matches, setMatches }) {
   }, [submitted]);
 
   return (
-    <div className="UserPage">
+    <div className='UserPage'>
       {/* header */}
-      <Box pt="120px" pb="60px" px={10} className="UserHeader" as="header">
+      <Box pt='120px' pb='60px' px={10} className='UserHeader' as='header'>
         {user && (
-          <Heading as="h1" my={17}>
+          <Heading as='h1' my={17}>
             Welcome, {user.name}
           </Heading>
         )}
@@ -83,57 +84,60 @@ function User({ matches, setMatches }) {
         {/* if company */}
         {user && +userType < 100 && (
           <>
-            <Container maxW="container.3xl" my={17} align="left" p="0">
-              <Card variant="filled" align="left" className="CompanyCard">
+            <Container maxW='container.3xl' my={17} align='left' p='0'>
+              <Card variant='filled' align='left' className='CompanyCard'>
                 <CardHeader pb={4}>
-                  <Heading as="h2" size="md">
+                  <Heading as='h2' size='md'>
                     Company Profile
                   </Heading>
                 </CardHeader>
 
                 <CardBody>
                   <Flex>
-                    <Box w="250px">
-                      <Stack spacing={6}>
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            User
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.userName}
-                          </Text>
-                        </Box>
-
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            Email
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.userEmail}
-                          </Text>
-                        </Box>
-                      </Stack>
+                    <Box w='230px'>
+                      {/* <Stack spacing={6}>
+                        <Box> */}
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        User
+                      </Heading>
+                      <Text pt='2' fontSize='md'>
+                        {user.userName}
+                      </Text>
                     </Box>
-                    <Box w="250px">
-                      <Stack spacing={6}>
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            Company Name
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.name}
-                          </Text>
-                        </Box>
+                    <Spacer />
 
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            <Link href={user.website} isExternal>
-                              Website <ExternalLinkIcon mx="2px" />
-                            </Link>
-                          </Heading>
-                        </Box>
-                      </Stack>
+                    <Box w='230px'>
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        Email
+                      </Heading>
+                      <Text pt='2' fontSize='md'>
+                        {user.userEmail}
+                      </Text>
                     </Box>
+                    {/*                    </Stack> */}
+                    {/*                   </Box> */}
+                    <Spacer />
+
+                    <Box w='230px'>
+                      {/* <Stack spacing={6}>
+                        <Box> */}
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        Company Name
+                      </Heading>
+                      <Text pt='2' fontSize='md'>
+                        {user.name}
+                      </Text>
+                    </Box>
+                    <Spacer />
+                    <Box w='230px'>
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        <Link href={user.website} isExternal>
+                          Website <ExternalLinkIcon mx='2px' />
+                        </Link>
+                      </Heading>
+                    </Box>
+                    {/* </Stack> */}
+                    {/* </Box> */}
                   </Flex>
                 </CardBody>
               </Card>
@@ -155,7 +159,7 @@ function User({ matches, setMatches }) {
       </Box>
 
       {/* Projects List */}
-      <Box py="60px" px={10} className="ProjectsList">
+      <Box py='60px' px={10} className='ProjectsList'>
         {/* if company */}
         {user && +userType < 100 && (
           <ProjectsList
