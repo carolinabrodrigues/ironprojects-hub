@@ -75,7 +75,20 @@ function AddProject({ setSubmitted, submitted }) {
     onOpen();
   };
 
-  console.log('challenge:', challengeName);
+  const formattingVideoUrl = e => {
+    let url = e.target.value;
+
+    if (url.includes('watch?v=')) {
+      url = url.replace('watch?v=', 'embed/');
+    } else if (url.includes('/share/')) {
+      url = url.replace('/share/', '/embed/');
+    } else if (url.includes('view?usp=sharing')) {
+      url = url.replace('view?usp=sharing', 'preview');
+    } else if (url.includes('/view') && url.includes('drive')) {
+      url = url.replace('/view', '/preview');
+    }
+    setVideoSubmission(url);
+  };
 
   return (
     /* Drawer */
@@ -149,6 +162,7 @@ function AddProject({ setSubmitted, submitted }) {
                       Challenge Description:
                     </FormLabel>
                     <Textarea
+                      wrap="hard"
                       name="challengeDescription"
                       id="challengeDescription"
                       cols="30"
@@ -171,7 +185,7 @@ function AddProject({ setSubmitted, submitted }) {
                         type="url"
                         name="videoSubmission"
                         id="videoSubmission"
-                        onChange={e => setVideoSubmission(e.target.value)}
+                        onChange={e => formattingVideoUrl(e)}
                         value={videoSubmission}
                         required
                         placeholder="http://www.google.com"

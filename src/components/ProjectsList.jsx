@@ -13,9 +13,10 @@ import {
   Text,
   Flex,
   HStack,
+  Icon,
 } from '@chakra-ui/react';
 
-import { ViewIcon } from '@chakra-ui/icons';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 function ProjectsList({
   userType,
@@ -60,7 +61,11 @@ function ProjectsList({
                     <HStack spacing={4}>
                       <Link to={`${project.id}`}>
                         <Button size="md" variant="link" className="LinkButton">
-                          <ViewIcon mr={2} />
+                          <Icon
+                            as={VisibilityRoundedIcon}
+                            mx={1}
+                            boxSize="16px"
+                          />
                           View more
                         </Button>
                       </Link>
@@ -111,7 +116,12 @@ function ProjectsList({
                     </Stack>
                     <Link to={`${project.id}`}>
                       <Button size="md" variant="link" className="LinkButton">
-                        <ViewIcon mr={2} /> View more
+                        <Icon
+                          as={VisibilityRoundedIcon}
+                          mx={1}
+                          boxSize="16px"
+                        />
+                        View more
                       </Button>
                     </Link>
                   </Flex>

@@ -11,9 +11,10 @@ import {
   AlertDialogOverlay,
   useDisclosure,
   Button,
+  Icon,
 } from '@chakra-ui/react';
 
-import { DeleteIcon } from '@chakra-ui/icons';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 function DeleteProject({ userType, projectId, project }) {
   // alert to delete
@@ -35,8 +36,15 @@ function DeleteProject({ userType, projectId, project }) {
 
   return (
     <div className="DeleteProject">
-      <Button colorScheme="red" onClick={onOpen} variant="link" size="lg">
-        <DeleteIcon mx={2} /> Delete
+      <Button
+        colorScheme="red"
+        onClick={onOpen}
+        background="#FFFFFF"
+        variant="outline"
+        borderRadius="32px"
+        size="md"
+      >
+        <Icon as={DeleteRoundedIcon} mx={1} /> Delete
       </Button>
 
       <AlertDialog

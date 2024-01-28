@@ -8,9 +8,10 @@ import {
   VStack,
   Text,
   Flex,
+  Icon,
 } from '@chakra-ui/react';
 
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
 import ironhackLogoLight from '../assets/logo/ironhack/light.svg';
 // import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
@@ -72,12 +73,12 @@ function Footer({ userType }) {
         </Link> */}
           <ChakraLink
             as={ReactRouterLink}
-            to=""
+            to="/how-it-works"
             display="flex"
             justifyContent="space-between"
           >
             How it Works
-            <ChevronRightIcon boxSize="24px" />
+            <Icon as={ChevronRightRoundedIcon} boxSize="24px" />
           </ChakraLink>
           <ChakraLink
             as={ReactRouterLink}
@@ -86,7 +87,7 @@ function Footer({ userType }) {
             justifyContent="space-between"
           >
             Contact Us
-            <ChevronRightIcon boxSize="24px" />
+            <Icon as={ChevronRightRoundedIcon} boxSize="24px" />
           </ChakraLink>
         </VStack>
         <VStack spacing="24px" align="end">

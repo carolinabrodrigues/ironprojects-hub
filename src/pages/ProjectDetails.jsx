@@ -17,7 +17,18 @@ import {
   GridItem,
   Link,
   AspectRatio,
+  Icon,
+  Card,
+  CardBody,
+  Text,
 } from '@chakra-ui/react';
+
+import {
+  OpenInNewRounded,
+  CorporateFareRounded,
+  PersonRounded,
+  EmojiEventsRounded,
+} from '@mui/icons-material';
 
 function ProjectDetails({ matches, setMatches }) {
   const [project, setProject] = useState(null);
@@ -59,7 +70,7 @@ function ProjectDetails({ matches, setMatches }) {
             <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
-            <HStack spacing={6}>
+            <HStack spacing={2}>
               <InterestButton
                 userType={+userType}
                 projectId={+projectId}
@@ -77,7 +88,7 @@ function ProjectDetails({ matches, setMatches }) {
             <Heading as="h1" size="xl">
               {project.challengeName}
             </Heading>
-            <HStack spacing={6}>
+            <HStack spacing={4}>
               <DeleteProject
                 userType={userType}
                 projectId={projectId}
@@ -94,58 +105,102 @@ function ProjectDetails({ matches, setMatches }) {
   // displaying page
   return (
     <div className="ProjectDetails">
-      <Box p="120px 80px 32px">
+      <Box p="120px 80px 32px" className="ProjectDetailsInfo">
         {project && displayHeader(+userType)}
         {project && company && (
-          <Grid templateColumns="repeat(6, 1fr)" gap={8}>
-            <GridItem colSpan={4}>
-              <VStack align="left">
-                <Heading as="h2" size="md">
-                  About the challenge:
-                </Heading>
-                <p>{project.challengeDescription}</p>
-                <AspectRatio mt={8}>
+          <>
+            <Grid templateColumns="repeat(12, 1fr)" gap={8}>
+              <GridItem colSpan={7}>
+                <Card>
+                  <CardBody>
+                    <VStack align="left" mb={2} spacing={4}>
+                      <Heading as="h2" size="md">
+                        <Icon as={CorporateFareRounded} mx={1} mb={-1} />
+                        About {company.name}:
+                      </Heading>
+
+                      <Link href={company.website} isExternal pl="4px">
+                        <Heading as="h3" size="sm">
+                          Website
+                          <Icon
+                            as={OpenInNewRounded}
+                            mx={1}
+                            mb={-0.5}
+                            boxSize="16px"
+                          />
+                        </Heading>
+                      </Link>
+                      <VStack align="left" pl="4px">
+                        <Heading as="h3" size="sm">
+                          Stakeholder information:
+                        </Heading>
+                        <ul className="list">
+                          {project.stakeholders.map(stakeholder => {
+                            return (
+                              <li key={project.id} className="stakeholder-info">
+                                <Icon
+                                  as={PersonRounded}
+                                  mx={1}
+                                  mb={-1}
+                                  boxSize="20px"
+                                />
+                                {stakeholder.name} -{' '}
+                                <Link
+                                  href={`mailto:${stakeholder.email}`}
+                                  isExternal
+                                >
+                                  {stakeholder.email}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </VStack>
+                    </VStack>
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem colSpan={5}>
+                <AspectRatio ratio={16 / 9} className="Video">
                   <iframe
                     title={`${project.challengeName}'s video`}
                     src={project.videoSubmission}
                     allowFullScreen
                   />
                 </AspectRatio>
-              </VStack>
-            </GridItem>
-            <GridItem colSpan={2}>
-              <VStack align="left" mb={2} spacing={6}>
-                <VStack align="left">
-                  <Heading as="h2" size="md">
-                    About the Company:
-                  </Heading>
-
-                  <Link href={company.website} isExternal>
-                    {company.name}
-                  </Link>
-                </VStack>
-                <VStack align="left">
-                  <Heading as="h3" size="sm">
-                    Stakeholder information:
-                  </Heading>
-                  <ul className="list">
-                    {project.stakeholders.map(stakeholder => {
-                      return (
-                        <li key={project.id} className="stakeholder-info">
-                          {stakeholder.name} -{' '}
-                          <Link href={`mailto:${stakeholder.email}`} isExternal>
-                            {stakeholder.email}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </VStack>
-              </VStack>
-            </GridItem>
-          </Grid>
+              </GridItem>
+            </Grid>
+          </>
         )}
       </Box>
+      {project && (
+        <Box p="32px 240px">
+          <VStack align="left" mt={4}>
+            <Heading as="h2" size="xl">
+              <Icon as={EmojiEventsRounded} mx={1} mb={-1} boxSize="32px" />
+              About the challenge:
+            </Heading>
+
+            {project.challengeDescription
+              .split(
+                `
+`
+              )
+              .map((str, index) => {
+                return (
+                  <Text
+                    pl="4px"
+                    fontSize="lg"
+                    lineHeight="150%"
+                    key={`${project.id}${index}`}
+                  >
+                    {str}
+                  </Text>
+                );
+              })}
+          </VStack>
+        </Box>
+      )}
       <Footer userType={userType} />
     </div>
   );

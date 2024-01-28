@@ -10,9 +10,10 @@ import {
   Button,
   Text,
   Flex,
+  Icon,
 } from '@chakra-ui/react';
 
-import { ViewIcon } from '@chakra-ui/icons';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 function WishList({ matches, userType, projects }) {
   // const [chosenProjects, setChosenProjects] = useState([]);
@@ -63,7 +64,7 @@ function WishList({ matches, userType, projects }) {
                 <Stack>
                   <Link to={`${project.id}`}>
                     <Button size="md" variant="link" className="LinkButton">
-                      <ViewIcon mr={2} />
+                      <Icon as={VisibilityRoundedIcon} mx={1} boxSize="16px" />
                       View more
                     </Button>
                   </Link>

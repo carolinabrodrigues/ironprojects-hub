@@ -15,12 +15,13 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Stack,
   Flex,
   Container,
   Spacer,
+  Icon,
 } from '@chakra-ui/react';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 
 function User({ matches, setMatches }) {
   const [user, setUser] = useState(null);
@@ -74,7 +75,7 @@ function User({ matches, setMatches }) {
   return (
     <div className='UserPage'>
       {/* header */}
-      <Box pt='120px' pb='60px' px={10} className='UserHeader' as='header'>
+      <Box pt='120px' pb='60px' px='80px' className='UserHeader' as='header'>
         {user && (
           <Heading as='h1' my={17}>
             Welcome, {user.name}
@@ -93,10 +94,8 @@ function User({ matches, setMatches }) {
                 </CardHeader>
 
                 <CardBody>
-                  <Flex>
-                    <Box w='230px'>
-                      {/* <Stack spacing={6}>
-                        <Box> */}
+                  <Flex justifyContent='space-between'>
+                    <Box w='24%'>
                       <Heading as='h3' size='sm' textTransform='uppercase'>
                         User
                       </Heading>
@@ -104,15 +103,35 @@ function User({ matches, setMatches }) {
                         {user.userName}
                       </Text>
                     </Box>
-                    <Spacer />
 
-                    <Box w='230px'>
+                    <Box w='24%'>
                       <Heading as='h3' size='sm' textTransform='uppercase'>
                         Email
                       </Heading>
                       <Text pt='2' fontSize='md'>
                         {user.userEmail}
                       </Text>
+                    </Box>
+                    <Box w='24%'>
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        Company Name
+                      </Heading>
+                      <Text pt='2' fontSize='md'>
+                        {user.name}
+                      </Text>
+                    </Box>
+
+                    <Box w='24%'>
+                      <Heading as='h3' size='sm' textTransform='uppercase'>
+                        <Link href={user.website} isExternal>
+                          Website{' '}
+                          <Icon
+                            as={OpenInNewRoundedIcon}
+                            mx={1}
+                            boxSize='16px'
+                          />
+                        </Link>
+                      </Heading>
                     </Box>
                     {/*                    </Stack> */}
                     {/*                   </Box> */}
@@ -159,7 +178,7 @@ function User({ matches, setMatches }) {
       </Box>
 
       {/* Projects List */}
-      <Box py='60px' px={10} className='ProjectsList'>
+      <Box py='60px' px='80px' className='ProjectsList'>
         {/* if company */}
         {user && +userType < 100 && (
           <ProjectsList

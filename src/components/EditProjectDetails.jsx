@@ -19,9 +19,10 @@ import {
   Button,
   useDisclosure,
   HStack,
+  Icon,
 } from '@chakra-ui/react';
 
-import { SettingsIcon } from '@chakra-ui/icons';
+import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 
 function EditProjectDetails({ edited, setEdited }) {
   const { projectId, userType } = useParams();
@@ -93,18 +94,33 @@ function EditProjectDetails({ edited, setEdited }) {
     onOpen();
   };
 
+  const formattingVideoUrl = e => {
+    let url = e.target.value;
+
+    if (url.includes('watch?v=')) {
+      url = url.replace('watch?v=', 'embed/');
+    } else if (url.includes('/share/')) {
+      url = url.replace('/share/', '/embed/');
+    } else if (url.includes('view?usp=sharing')) {
+      url = url.replace('view?usp=sharing', 'preview');
+    } else if (url.includes('/view') && url.includes('drive')) {
+      url = url.replace('/view', '/preview');
+    }
+    setVideoSubmission(url);
+  };
+
   return (
     /* Drawer */
     <>
       <div className="EditProject">
         <Button
           variant="solid"
-          size="lg"
+          size="md"
           onClick={editingProject}
           className="SolidButton"
         >
           {' '}
-          <SettingsIcon mr={2} /> Edit
+          <Icon as={EditNoteRoundedIcon} mx={1} /> Edit
         </Button>
         <Drawer placement="right" onClose={onClose} isOpen={isOpen} size="lg">
           <DrawerOverlay />
@@ -166,6 +182,7 @@ function EditProjectDetails({ edited, setEdited }) {
                       Challenge Description:
                     </FormLabel>
                     <Textarea
+                      wrap="hard"
                       name="challengeDescription"
                       id="challengeDescription"
                       cols="30"
@@ -188,7 +205,7 @@ function EditProjectDetails({ edited, setEdited }) {
                         type="url"
                         name="videoSubmission"
                         id="videoSubmission"
-                        onChange={e => setVideoSubmission(e.target.value)}
+                        onChange={e => formattingVideoUrl(e)}
                         value={videoSubmission}
                         required
                         placeholder="http://www.google.com"

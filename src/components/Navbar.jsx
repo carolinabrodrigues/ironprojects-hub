@@ -1,4 +1,4 @@
-import { Link as ReactRouterLink, useParams } from 'react-router-dom';
+import { Link as ReactRouterLink } from 'react-router-dom';
 import {
   Box,
   Link as ChakraLink,
@@ -13,14 +13,13 @@ import ironhackLogoDark from '../assets/logo/ironhack/dark.svg';
 
 function Navbar({ location }) {
   const [theme, setTheme] = useState(null);
-  const { projectId } = useParams();
 
   useEffect(() => {
     defineTheme();
   }, [location]);
 
   const defineTheme = () => {
-    if (location.pathname.includes('projects/')) {
+    if (location.pathname.includes('how-it-works')) {
       setTheme('dark');
     } else {
       setTheme('light');
