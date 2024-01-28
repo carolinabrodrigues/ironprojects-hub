@@ -15,11 +15,12 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Stack,
   Flex,
   Container,
+  Icon,
 } from '@chakra-ui/react';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 
 function User({ matches, setMatches }) {
   const [user, setUser] = useState(null);
@@ -92,47 +93,44 @@ function User({ matches, setMatches }) {
                 </CardHeader>
 
                 <CardBody>
-                  <Flex>
-                    <Box w="250px">
-                      <Stack spacing={6}>
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            User
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.userName}
-                          </Text>
-                        </Box>
-
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            Email
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.userEmail}
-                          </Text>
-                        </Box>
-                      </Stack>
+                  <Flex justifyContent="space-between">
+                    <Box w="24%">
+                      <Heading as="h3" size="sm" textTransform="uppercase">
+                        User
+                      </Heading>
+                      <Text pt="2" fontSize="md">
+                        {user.userName}
+                      </Text>
                     </Box>
-                    <Box w="250px">
-                      <Stack spacing={6}>
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            Company Name
-                          </Heading>
-                          <Text pt="2" fontSize="md">
-                            {user.name}
-                          </Text>
-                        </Box>
 
-                        <Box>
-                          <Heading as="h3" size="sm" textTransform="uppercase">
-                            <Link href={user.website} isExternal>
-                              Website <ExternalLinkIcon mx="2px" />
-                            </Link>
-                          </Heading>
-                        </Box>
-                      </Stack>
+                    <Box w="24%">
+                      <Heading as="h3" size="sm" textTransform="uppercase">
+                        Email
+                      </Heading>
+                      <Text pt="2" fontSize="md">
+                        {user.userEmail}
+                      </Text>
+                    </Box>
+                    <Box w="24%">
+                      <Heading as="h3" size="sm" textTransform="uppercase">
+                        Company Name
+                      </Heading>
+                      <Text pt="2" fontSize="md">
+                        {user.name}
+                      </Text>
+                    </Box>
+
+                    <Box w="24%">
+                      <Heading as="h3" size="sm" textTransform="uppercase">
+                        <Link href={user.website} isExternal>
+                          Website{' '}
+                          <Icon
+                            as={OpenInNewRoundedIcon}
+                            mx={1}
+                            boxSize="16px"
+                          />
+                        </Link>
+                      </Heading>
                     </Box>
                   </Flex>
                 </CardBody>

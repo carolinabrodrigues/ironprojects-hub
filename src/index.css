@@ -23,12 +23,27 @@
     var(--ocean-blue-light) 24.14%,
     var(--purple) 100%
   );
+  --button-gradient-hover: linear-gradient(
+    102deg,
+    var(--ocean-blue) 24.14%,
+    var(--ocean-blue) 100%
+  );
 }
 
 body {
   background-color: var(--concrete) !important;
 }
 
+/* NAVBAR THEME */
+.dark {
+  color: black;
+}
+
+.light {
+  color: var(--white);
+}
+
+/* BUTTON */
 .OutlineButton {
   border: 2px solid var(--purple) !important;
   background: var(--white) !important;
@@ -40,14 +55,18 @@ body {
   color: var(--white) !important;
 }
 
-.dark {
-  background-color: white;
-  position: fixed !important;
-  color: black;
+.LinkButton {
+  color: var(--purple) !important;
 }
 
-.light {
-  color: var(--white);
+.SolidButton {
+  background: var(--button-gradient) !important;
+  color: var(--white) !important;
+  border-radius: 32px !important;
+}
+
+.SolidButton:hover {
+  background: var(--button-gradient-hover) !important;
 }
 
 .Hero {
@@ -74,22 +93,8 @@ body {
   color: black;
 }
 
-.LinkButton {
-  color: var(--purple) !important;
-}
-
 .ProjectCard {
   background-color: white !important;
-}
-
-.SolidButton {
-  background: var(--button-gradient) !important;
-  color: var(--white) !important;
-  border-radius: 32px !important;
-}
-
-.SolidButton:hover {
-  background-color: var(--ocean-blue) !important;
 }
 
 .ProjectDetails {
@@ -97,5 +102,63 @@ body {
 }
 
 .list {
-  padding-left: 20px;
+  list-style: none;
+}
+
+.HowItWorks {
+  padding-top: 120px;
+}
+
+.howWorksAll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.howWorksNumbers {
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.howWorksLine {
+  position: absolute;
+  /* border: solid 2px blue; */
+  border-style: solid;
+  border-width: 2px;
+  border-image: var(--made-of-iron) 30;
+  /* background-color: var(--made-of-iron); */
+  margin-top: 30px;
+  left: 100px;
+  right: 100px;
+}
+
+.howWorksText {
+  margin-top: 30px;
+  width: 180px;
+  text-align: center;
+}
+
+.stepBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  height: auto;
+  width: 60px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.ProjectDetailsInfo {
+  background: var(--made-of-iron);
+  color: white;
+}
+
+.Video {
+  position: sticky;
 }

@@ -19,10 +19,7 @@ function Navbar({ location }) {
   }, [location]);
 
   const defineTheme = () => {
-    if (
-      location.pathname.includes('projects/') ||
-      location.pathname.includes('works')
-    ) {
+    if (location.pathname.includes('how-it-works')) {
       setTheme('dark');
     } else {
       setTheme('light');

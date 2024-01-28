@@ -3,8 +3,6 @@ import { Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { AddIcon, CloseIcon } from '@chakra-ui/icons';
-
 function InterestButton({ projectId, userType, setMatches }) {
   const [foundMatch, setFoundMatch] = useState(null);
   const [changeInterest, setChangeInterest] = useState(false);
@@ -80,11 +78,34 @@ function InterestButton({ projectId, userType, setMatches }) {
   }, [changeInterest]);
 
   return (
+    // <>
+    //   {foundMatch && foundMatch !== null ? (
+    //     <Button
+    //       onClick={() => setChangeInterest(!changeInterest)}
+    //       className="SolidButton"
+    //       variant="solid"
+    //       size="md"
+    //     >
+    //       Remove Interest
+    //     </Button>
+    //   ) : (
+    //     <Button
+    //       onClick={() => setChangeInterest(!changeInterest)}
+    //       className="OutlineButton"
+    //       variant="outline"
+    //       size="md"
+    //       borderRadius="32px"
+    //     >
+    //       Show Interest
+    //     </Button>
+    //   )}
+    // </>
     <Button
       onClick={() => setChangeInterest(!changeInterest)}
       className="SolidButton"
-      variant="solid"
+      variant="Outline"
       size="md"
+      borderRadius="32px"
     >
       {foundMatch && foundMatch !== null ? 'Remove Interest' : 'Show Interest'}
     </Button>
