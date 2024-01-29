@@ -38,7 +38,7 @@ function Navbar({ location }) {
       className={`NavBar ${theme}`}
     >
       <HStack spacing="48px">
-        <ChakraLink as={ReactRouterLink} to="/">
+        <ChakraLink as={ReactRouterLink} to="/" aria-label="Home Page">
           {theme === 'dark' ? (
             <Image src={ironhackLogoDark} h="32px" alt="IronProjects Logo" />
           ) : (
