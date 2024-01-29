@@ -40,9 +40,9 @@ function Navbar({ location }) {
       <HStack spacing="48px">
         <ChakraLink as={ReactRouterLink} to="/">
           {theme === 'dark' ? (
-            <Image src={ironhackLogoDark} h="32px" />
+            <Image src={ironhackLogoDark} h="32px" alt="IronProjects Logo" />
           ) : (
-            <Image src={ironhackLogoLight} h="32px" />
+            <Image src={ironhackLogoLight} h="32px" alt="IronProjects Logo" />
           )}
         </ChakraLink>
         {/* <Link to='/'>
