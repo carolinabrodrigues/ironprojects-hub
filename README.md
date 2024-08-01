@@ -3,14 +3,12 @@ IronProjects Hub is a powerful application designed to manage project submission
 
 **How It Works**
 For Companies:
-
-	•	Add and Edit Projects: Companies can easily add new projects and update existing ones, ensuring that students have access to the most current opportunities.
-	•	Restricted Access: Companies have the ability to manage their own projects but do not have visibility into all projects within the hub, maintaining privacy and focus.
+- Add and Edit Projects: Companies can easily add new projects and update existing ones, ensuring that students have access to the most current opportunities.
+- Restricted Access: Companies have the ability to manage their own projects but do not have visibility into all projects within the hub, maintaining privacy and focus.
 
 For Students:
-
-	•	Explore Projects: Students can browse through a comprehensive list of projects, viewing detailed information about each one, including objectives, requirements, and potential outcomes.
-	•	Select Favorites: After reviewing the available options, students can pick their favorite projects that align with their interests and academic goals.
+- Explore Projects: Students can browse through a comprehensive list of projects, viewing detailed information about each one, including objectives, requirements, and potential outcomes.
+- Select Favorites: After reviewing the available options, students can pick their favorite projects that align with their interests and academic goals.
 
 **Tech Stack**
 - Javascript
